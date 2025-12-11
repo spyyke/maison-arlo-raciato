@@ -10,8 +10,8 @@
         },
         "images": [
             {
-                "url": "/assets/santelmo.png",
-                "altText": "Santelmo Bottle"
+                "url": "/assets/santelmo_visual.png",
+                "altText": "Santelmo Visual"
             }
         ],
         "scent_notes": [
@@ -61,8 +61,8 @@
         },
         "images": [
             {
-                "url": "/assets/minokawa.png",
-                "altText": "Minokawa Bottle"
+                "url": "/assets/minokawa_visual.png",
+                "altText": "Minokawa Visual"
             }
         ],
         "scent_notes": [
@@ -112,8 +112,8 @@
         },
         "images": [
             {
-                "url": "/assets/lakapati.png",
-                "altText": "Lakapati Bottle"
+                "url": "/assets/lakapati_visual.png",
+                "altText": "Lakapati Visual"
             }
         ],
         "scent_notes": [
@@ -158,8 +158,8 @@
         },
         "images": [
             {
-                "url": "/assets/anatala.png",
-                "altText": "Anatala Bottle"
+                "url": "/assets/anatala_visual.png",
+                "altText": "Anatala Visual"
             }
         ],
         "scent_notes": [
@@ -208,8 +208,8 @@
         },
         "images": [
             {
-                "url": "/assets/thaya.png",
-                "altText": "Thaya Bottle"
+                "url": "/assets/thaya_visual.png",
+                "altText": "Thaya Visual"
             }
         ],
         "scent_notes": [
@@ -259,8 +259,8 @@
         },
         "images": [
             {
-                "url": "/assets/mayari.png",
-                "altText": "Mayari Bottle"
+                "url": "/assets/mayari_visual.png",
+                "altText": "Mayari Visual"
             }
         ],
         "scent_notes": [
@@ -305,8 +305,8 @@
         },
         "images": [
             {
-                "url": "/assets/sinaya.png",
-                "altText": "Sinaya Bottle"
+                "url": "/assets/sinaya_visual.png",
+                "altText": "Sinaya Visual"
             }
         ],
         "scent_notes": [
@@ -356,8 +356,8 @@
         },
         "images": [
             {
-                "url": "/assets/mapulon.png",
-                "altText": "Mapulon Bottle"
+                "url": "/assets/mapulon_visual.png",
+                "altText": "Mapulon Visual"
             }
         ],
         "scent_notes": [
@@ -406,8 +406,8 @@
         },
         "images": [
             {
-                "url": "/assets/hanan.png",
-                "altText": "Hanan Bottle"
+                "url": "/assets/hanan_visual.png",
+                "altText": "Hanan Visual"
             }
         ],
         "scent_notes": [
@@ -457,8 +457,8 @@
         },
         "images": [
             {
-                "url": "/assets/urduja.png",
-                "altText": "Urduja Bottle"
+                "url": "/assets/urduja_visual.png",
+                "altText": "Urduja Visual"
             }
         ],
         "scent_notes": [

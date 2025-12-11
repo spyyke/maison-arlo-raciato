@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import './Navbar.css';
-import logo from '../../assets/logo-new.png';
+import logo from '../../assets/logo-mar-traced.svg';
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);

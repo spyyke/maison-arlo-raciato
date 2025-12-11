@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const CartContext = createContext();
@@ -5,21 +6,17 @@ const CartContext = createContext();
 export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
-    const [cart, setCart] = useState({ items: [], total: 0 });
+    const [cart, setCart] = useState(() => {
+        try {
+            const savedCart = localStorage.getItem('local_cart');
+            return savedCart ? JSON.parse(savedCart) : { items: [], total: 0 };
+        } catch (error) {
+            console.error("Failed to parse cart from local storage", error);
+            return { items: [], total: 0 };
+        }
+    });
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [isAdding, setIsAdding] = useState(false);
-
-    // Initialize cart from localStorage
-    useEffect(() => {
-        const savedCart = localStorage.getItem('local_cart');
-        if (savedCart) {
-            try {
-                setCart(JSON.parse(savedCart));
-            } catch (error) {
-                console.error("Failed to parse cart from local storage", error);
-            }
-        }
-    }, []);
 
     // Persist cart to localStorage whenever it changes
     useEffect(() => {

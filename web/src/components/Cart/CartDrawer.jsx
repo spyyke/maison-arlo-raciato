@@ -8,21 +8,24 @@ const CartDrawer = () => {
         isCartOpen,
         closeCart,
         removeFromCart,
-        updateQuantity,
-        clearCart
+        updateQuantity
     } = useCart();
 
     const [isVisible, setIsVisible] = useState(false);
     const [showCheckout, setShowCheckout] = useState(false);
 
     useEffect(() => {
-        if (isCartOpen) setIsVisible(true);
-        else {
-            setTimeout(() => {
+        let timer;
+        if (isCartOpen) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
+            setIsVisible(true);
+        } else {
+            timer = setTimeout(() => {
                 setIsVisible(false);
                 setShowCheckout(false); // Reset checkout view on close
             }, 500);
         }
+        return () => clearTimeout(timer);
     }, [isCartOpen]);
 
     if (!isVisible && !isCartOpen) return null;

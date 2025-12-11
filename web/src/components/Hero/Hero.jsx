@@ -1,8 +1,10 @@
 import React from 'react';
 import './Hero.css';
-import heroBg from '../../assets/hero-bg.webp';
+import heroBg from '../../assets/hero-bg-generated.png';
+// To use a video background, uncomment the line below and place 'hero-bg.mp4' in src/assets
+// import heroVideo from '../../assets/hero-bg.mp4';
 
-import logoSvg from '../../assets/logo-new.png';
+import logo from '../../assets/logo-mar-traced.svg';
 
 const Hero = () => {
     const [scrollState, setScrollState] = React.useState({
@@ -29,7 +31,7 @@ const Hero = () => {
 
             // Interpolate Y Position (Move up faster than scroll to stick to top or float up)
             // We want it to start centered (50vh) and end at top (38px measured center of scrolled navbar logo)
-            const startTop = window.innerHeight * 0.35;
+            const startTop = window.innerHeight * 0.5;
             const endTop = 38;
             const currentTop = startTop - (progress * (startTop - endTop));
 
@@ -57,11 +59,11 @@ const Hero = () => {
 
     return (
         <section className="hero">
-            {/* Animated Fixed Logo */}
+            {/* Animated Fixed Logo - REMOVED in favor of static placement per request
             <div
                 className="hero-logo-animated-wrapper"
                 style={{
-                    transform: `translate(-50%, -50%) translate3d(0, ${scrollState.logoY - (window.innerHeight * 0.35)}px, 0) scale(${scrollState.logoScale})`,
+                    transform: `translate(-50%, -50%) translate3d(0, ${scrollState.logoY - (window.innerHeight * 0.5)}px, 0) scale(${scrollState.logoScale})`,
                     opacity: scrollState.opacity,
                     // If opacity is 0, pointer events none so we can click navbar
                     pointerEvents: scrollState.opacity === 0 ? 'none' : 'auto'
@@ -69,17 +71,35 @@ const Hero = () => {
             >
                 <img src={logoSvg} alt="Maison Arlo Raciàto Logo" />
             </div>
+            */}
 
             <div
                 className="hero-background"
                 style={{ transform: `translateY(${scrollState.offset * 0.5}px)` }}
             >
+                {/* Video Background Support - Uncomment import above and lines below to enable */}
+                {/* 
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    poster={heroBg}
+                    className="hero-video"
+                >
+                    <source src={heroVideo} type="video/mp4" />
+                </video> 
+                */}
+
                 <img src={heroBg} alt="Maison Arlo Raciàto Collection" />
                 <div className="hero-overlay"></div>
             </div>
 
             <div className="hero-content">
 
+                <div className="hero-logo-static">
+                    <img src={logo} alt="Maison Arlo Raciàto Logo" className="logo-image" />
+                </div>
                 <h2 className="hero-subtitle">Maison Arlo Raciàto</h2>
                 <h1 className="hero-title text-shimmer">Defined by<br />Subtlety</h1>
                 <p className="hero-description">

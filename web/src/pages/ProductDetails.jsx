@@ -3,6 +3,9 @@ import { useQuery } from '@tanstack/react-query';
 import { useParams, Link } from 'react-router-dom';
 import { ProductService } from '../services/productService';
 import { useCart } from '../context/CartContext';
+import ProductBottle from '../components/Product/ProductBottle';
+import OlfactoryPyramid from '../components/Product/OlfactoryPyramid';
+import ParallaxText from '../components/Motion/ParallaxText';
 import './ProductDetails.css';
 
 const ProductDetails = () => {
@@ -57,7 +60,11 @@ const ProductDetails = () => {
         <div className="product-details-page">
             <div className="product-details-container">
                 <div className="product-details-image-wrapper">
-                    <img src={imageSrc} alt={product.title} className="product-details-image" />
+                    <img
+                        src={imageSrc}
+                        alt={product.title}
+                        className="product-details-image"
+                    />
                 </div>
 
                 <div className="product-details-info">
@@ -90,23 +97,32 @@ const ProductDetails = () => {
 
                     {product.scent_notes && (
                         <div className="scent-notes-section">
-                            <h3 className="scent-notes-title">Scent Notes</h3>
-                            <div className="scent-notes-grid">
-                                {product.scent_notes.map((note, index) => (
-                                    <span key={index} className="scent-note-tag">{note}</span>
-                                ))}
-                            </div>
+                            <h3 className="scent-notes-title">Olfactory Composition</h3>
+                            <OlfactoryPyramid notes={product.scent_notes} />
                         </div>
                     )}
 
                     <div className="product-actions">
-                        <button
-                            className="add-to-cart-btn"
-                            onClick={handleAddToCart}
-                            disabled={isAdding}
-                        >
-                            {isAdding ? 'Adding...' : 'Add to Cart'}
-                        </button>
+                        <div className="buttons-row" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                            <button
+                                className="add-to-cart-btn btn-primary"
+                                onClick={handleAddToCart}
+                                disabled={isAdding}
+                                style={{ flex: 1, minWidth: '200px' }}
+                            >
+                                {isAdding ? 'Adding...' : 'Add to Cart'}
+                            </button>
+                            <button
+                                className="sample-btn btn-bronze"
+                                onClick={() => alert('Sample added to cart (Demo)')}
+                                style={{ flex: 1, minWidth: '200px' }}
+                            >
+                                Request Sample ($10)
+                            </button>
+                        </div>
+                        <p style={{ marginTop: '0.5rem', fontSize: '0.8rem', color: 'var(--color-charcoal-muted)', fontStyle: 'italic' }}>
+                            Try before you commit. The cost of the sample is credited towards your full bottle purchase.
+                        </p>
                     </div>
 
                     <Link to="/" className="back-link">← Back to Collection</Link>

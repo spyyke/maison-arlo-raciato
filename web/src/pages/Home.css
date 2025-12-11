@@ -3,11 +3,25 @@
     background-color: var(--color-cream-base);
 }
 
+/* Override default Section constraints for full-width layout */
+.heritage-section,
+.philosophy-section {
+    padding: 0 !important;
+    /* Force removal of default section padding */
+    width: 100%;
+}
+
+.heritage-section .section-content,
+.philosophy-section .section-content {
+    max-width: 100%;
+    /* Allow full width */
+}
+
+/* Global Section Typography (can be overridden locally) */
 .section-title {
     font-family: var(--font-heading);
-    font-size: 3.5rem;
+    font-size: 3rem;
     color: var(--color-charcoal);
-    /* Dark text for light bg */
     margin-bottom: 2rem;
     font-weight: 400;
     letter-spacing: -0.02em;
@@ -15,40 +29,55 @@
 
 .section-body {
     font-family: var(--font-body);
-    font-size: 1.125rem;
+    font-size: 1.1rem;
     color: var(--color-charcoal-muted);
-    /* Stone text */
-    max-width: 65ch;
-    margin-inline: auto;
-    /* Center the text block */
-    line-height: 1.9;
+    line-height: 1.8;
     font-weight: 300;
+    /* max-width is handled by the subtle-grid layout now */
 }
 
-.philosophy-content,
-.heritage-content {
+/* Immersive Split Layout */
+.heritage-content,
+.philosophy-content {
     display: flex;
     flex-direction: column;
-    gap: 4rem;
-    align-items: center;
-    text-align: center;
-    padding-block: 6rem;
-    /* Increased spacing for luxury feel */
+    /* Mobile first: stack */
+    width: 100%;
+    min-height: 80vh;
+    /* Taller, more premium feel */
 }
 
-/* Alternating backgrounds for depth - Light Mode */
-.heritage-section {
-    background-color: var(--color-cream-base);
+/* Desktop Split */
+@media (min-width: 1024px) {
+    .heritage-content {
+        flex-direction: row;
+    }
+
+    .philosophy-content {
+        flex-direction: row;
+        /* Keep natural HTML order (Text | Image) for Zigzag */
+    }
 }
 
-.philosophy-section {
-    background-color: var(--color-cream-surface);
-    /* Slightly darker cream for contrast */
+/* Image Side */
+.heritage-image-wrapper,
+.philosophy-image-wrapper {
+    flex: 1;
+    height: 50vh;
+    /* Mobile height */
+    position: relative;
+    overflow: hidden;
+    /* No border radius for edge-to-edge look */
 }
 
-.collection-section {
-    background-color: var(--color-cream-base);
-    padding-bottom: 8rem;
+@media (min-width: 1024px) {
+
+    .heritage-image-wrapper,
+    .philosophy-image-wrapper {
+        height: auto;
+        min-height: 80vh;
+        /* Match container */
+    }
 }
 
 .heritage-image,
@@ -56,81 +85,68 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: var(--radius-sm);
-    box-shadow: var(--shadow-subtle);
+    transition: transform 1.5s ease;
 }
 
-.heritage-image-wrapper,
-.philosophy-image-wrapper {
-    width: 100%;
-    height: 600px;
-    position: relative;
-    overflow: hidden;
+/* Subtle zoom effect on hover */
+.heritage-image-wrapper:hover .heritage-image,
+.philosophy-image-wrapper:hover .philosophy-image {
+    transform: scale(1.03);
 }
 
-/* Add shimmer overlay to images on hover */
-.heritage-image-wrapper::after,
-.philosophy-image-wrapper::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(45deg,
-            rgba(156, 140, 116, 0.1),
-            rgba(255, 255, 255, 0.1),
-            rgba(156, 140, 116, 0.1));
-    opacity: 0;
-    transition: opacity 0.6s ease;
+/* Text Side */
+.heritage-text,
+.philosophy-text {
+    flex: 1;
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--color-cream-base);
 }
 
-.heritage-image-wrapper:hover::after,
-.philosophy-image-wrapper:hover::after {
-    opacity: 1;
+/* Centering the text content within the text side */
+.heritage-text>*,
+.philosophy-text>* {
+    max-width: 550px;
+    margin-inline: auto;
+    /* Center visually */
 }
 
-
-
-@media (max-width: 1024px) {
-
-    .philosophy-content,
-    .heritage-content {
-        gap: 4rem;
-    }
-
-    .section-title {
-        font-size: 3rem;
-    }
+/* Specific Treatments */
+.heritage-section {
+    background-color: var(--color-cream-base);
 }
 
-@media (max-width: 768px) {
+.philosophy-section {
+    background-color: #FDFBF7;
+    /* Very subtle difference or keeping same */
+}
 
-    .heritage-content,
-    .philosophy-content {
-        grid-template-columns: 1fr;
-        gap: 4rem;
-        padding-block: 4rem;
-    }
+/* Quote Highlight */
+.quote-highlight {
+    display: block;
+    margin-top: 3rem;
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    color: var(--color-bronze);
+    font-style: italic;
+    border-top: 1px solid rgba(166, 124, 82, 0.3);
+    padding-top: 2rem;
+}
 
-    .philosophy-content {
-        display: flex;
-        flex-direction: column-reverse;
-    }
-
-    .section-title {
-        font-size: 2.5rem;
-    }
-
-    .heritage-image-wrapper,
-    .philosophy-image-wrapper {
-        height: 400px;
-    }
+/* Collection Section (unchanged logic largely, keeping cleanup) */
+.collection-section {
+    background-color: var(--color-cream-base);
+    padding-bottom: 8rem;
+    /* Restore standard padding if needed, but .section has it */
 }
 
 .collection-header {
     text-align: center;
-    margin-bottom: 6rem;
+    margin-bottom: 5rem;
     max-width: 800px;
     margin-inline: auto;
-    padding-top: 4rem;
 }
 
 .section-subtitle {
@@ -139,59 +155,27 @@
     color: var(--color-charcoal-muted);
     text-transform: uppercase;
     letter-spacing: 0.3em;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     display: block;
 }
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 4rem 2rem;
     width: 100%;
+    max-width: 1400px;
+    /* Limit ultra-wide grid */
+    margin-inline: auto;
 }
 
+/* Skeleton & Loading (kept from previous) */
 .loading-state {
     text-align: center;
-    font-family: var(--font-body);
-    color: var(--color-charcoal-muted);
-    font-size: 0.8rem;
-    letter-spacing: 0.2em;
     padding: 6rem;
     opacity: 0.7;
-    text-transform: uppercase;
-    animation: fadePulse 2s infinite ease-in-out;
 }
 
-@keyframes fadePulse {
-
-    0%,
-    100% {
-        opacity: 0.4;
-    }
-
-    50% {
-        opacity: 0.8;
-    }
-}
-
-.quote-highlight {
-    display: block;
-    margin-top: 3rem;
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    color: var(--color-charcoal);
-    font-style: italic;
-    border-left: none;
-    /* Remove side border for centered layout */
-    border-top: 1px solid var(--color-bronze);
-    border-bottom: 1px solid var(--color-bronze);
-    padding: 1rem 0;
-    max-width: 400px;
-    margin-inline: auto;
-    line-height: 1.4;
-}
-
-/* Skeleton Loading State - Light Mode */
 .skeleton-card {
     display: flex;
     flex-direction: column;
@@ -202,14 +186,11 @@
     width: 100%;
     aspect-ratio: 4/5;
     background-color: rgba(58, 54, 51, 0.05);
-    /* Warm grey */
-    opacity: 0.5;
     border-radius: var(--radius-sm);
 }
 
 .skeleton-text {
     background-color: rgba(58, 54, 51, 0.05);
-    opacity: 0.3;
     border-radius: 2px;
 }
 

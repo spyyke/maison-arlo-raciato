@@ -1,6 +1,8 @@
 .hero {
     position: relative;
     height: 100vh;
+    height: 100dvh;
+    /* Modern viewport unit */
     width: 100%;
     display: flex;
     align-items: center;
@@ -18,11 +20,25 @@
     z-index: 1;
 }
 
-.hero-background img {
+.hero-background img,
+.hero-background video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
+    will-change: transform;
+}
+
+.hero-background img {
+    animation: heroZoom 30s infinite alternate ease-in-out;
+}
+
+.hero-background video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    /* Behind overlay */
 }
 
 .hero-overlay {
@@ -43,37 +59,60 @@
     /* Changed from absolute to relative for Flexbox flow */
     z-index: 2;
     text-align: center;
-    max-width: 1000px;
+    max-width: 1200px;
+    /* Increased max-width */
     width: 100%;
     padding: 0 2rem;
-    padding-top: 35vh;
-    /* Push content below the logo (approx 35% height) */
+    /* Removed padding-top: 35vh; let flexbox center it */
     animation: fadeIn 2s ease-out;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 1.5rem;
+    /* Consistent spacing */
+}
+
+.logo-image {
+    width: 140px;
+    /* Slightly smaller for balance */
+    height: auto;
+    margin-bottom: 0;
+    /* Handled by gap */
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+    opacity: 0.9;
+    /* Slight integration with background */
 }
 
 .hero-subtitle {
-    font-family: var(--font-body);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.4em;
-    margin-bottom: 2rem;
-    opacity: 0.9;
-    color: var(--color-bronze);
+    font-family: var(--font-heading);
+    /* Playfair Display */
+    font-style: italic;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    /* Responsive */
+    font-weight: 400;
+    /* Light/Regular for sophistication */
+    text-transform: none;
+    /* Keep Title Case */
+    letter-spacing: 0.05em;
+    /* Editorial tracking */
+    margin-bottom: 0;
+    /* Handled by gap */
+    opacity: 0.8;
+    color: var(--color-charcoal);
     text-shadow: none;
-    /* Removed for light theme */
 }
 
 .hero-title {
     font-family: var(--font-heading);
-    font-size: 6rem;
-    line-height: 1;
-    margin-bottom: 2rem;
+    font-size: clamp(3.5rem, 8vw, 6rem);
+    /* Responsive scaling */
+    line-height: 0.9;
+    /* Tighter leading */
+    margin-bottom: 0.5rem;
     font-weight: 400;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.04em;
+    /* Tighter tracking for headline */
     text-shadow: none;
     color: var(--color-charcoal);
     text-align: center;
@@ -82,13 +121,12 @@
 
 .hero-description {
     font-family: var(--font-body);
-    font-size: 1.1rem;
-    margin-bottom: 3rem;
+    font-size: clamp(1rem, 1.5vw, 1.1rem);
+    margin: 0 auto 1rem auto;
+    line-height: 1.6;
     opacity: 0.9;
     /* Increased opacity */
     max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
     color: var(--color-charcoal-muted);
     text-shadow: none;
 }
@@ -124,8 +162,8 @@
 
 .hero-logo-animated-wrapper {
     position: fixed;
-    top: 35%;
-    /* Moved up slightly from 50% */
+    top: 50%;
+    /* Moved to true center */
     left: 50%;
     z-index: 2000;
     width: 300px;
@@ -143,6 +181,16 @@
     display: block;
     /* Ensure it behaves well on light bg */
     filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+}
+
+@keyframes heroZoom {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.1);
+    }
 }
 
 @media (max-width: 768px) {
