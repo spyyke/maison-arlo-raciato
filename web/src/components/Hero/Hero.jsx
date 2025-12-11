@@ -83,7 +83,7 @@ const Hero = () => {
                 <h2 className="hero-subtitle">Maison Arlo Raciàto</h2>
                 <h1 className="hero-title text-shimmer">Defined by<br />Subtlety</h1>
                 <p className="hero-description">
-                    Timeless fragrances, crafted with intent.
+                    Timeless fragrances, crafted with passion.
                 </p>
                 <button className="btn-bronze" onClick={scrollToShop}>Discover the Collection</button>
             </div>
