@@ -1,0 +1,494 @@
+[
+    {
+        "id": "prod_santelmo",
+        "title": "Santelmo",
+        "handle": "santelmo",
+        "description": "An enigmatic flame dances in the twilight, its mesmerizing glow captivating all who behold it. This is Santelmo – a fragrance that ignites the presence with an intensely vibrant energy. A daring spark of brilliance unfolds first, then smolders into a profoundly warm and sensual embrace that lingers like an unforgettable legend. The scent of audacious charm and passionate encounters under a starlit sky, it wraps its wearer in an aura of mystique and undeniable allure. Embody the fire. 🔥✨",
+        "price": {
+            "amount": "400.00",
+            "currencyCode": "PHP"
+        },
+        "images": [
+            {
+                "url": "/assets/santelmo.png",
+                "altText": "Santelmo Bottle"
+            }
+        ],
+        "scent_notes": [
+            "Vanilla",
+            "Aromatic",
+            "Green",
+            "Fresh Spicy",
+            "Amber",
+            "Fruity",
+            "Citrus",
+            "Woody",
+            "Sweet",
+            "Fresh"
+        ],
+        "variants": [
+            {
+                "id": "var_santelmo_50",
+                "title": "50ml",
+                "price": {
+                    "amount": "400.00",
+                    "currencyCode": "PHP"
+                }
+            },
+            {
+                "id": "var_santelmo_100",
+                "title": "100ml",
+                "price": {
+                    "amount": "750.00",
+                    "currencyCode": "PHP"
+                }
+            }
+        ],
+        "tags": [
+            "Vibrant",
+            "Sensual",
+            "Unisex"
+        ]
+    },
+    {
+        "id": "prod_minokawa",
+        "title": "Minokawa",
+        "handle": "minokawa",
+        "description": "The majestic lunar bird soars high above, its shadow gracing the lands with sovereign power and serene confidence. Minokawa's essence begins with an uplifting sweep of freshness, as clear and vast as the open sky, then journeys into a heart of profound, earthy sophistication. Its trail endures with strength and visionary spirit, a signature for those who command their destiny with quiet assurance and refined grace. The conqueror awakens. 🦅🌙",
+        "price": {
+            "amount": "400.00",
+            "currencyCode": "PHP"
+        },
+        "images": [
+            {
+                "url": "/assets/minokawa.png",
+                "altText": "Minokawa Bottle"
+            }
+        ],
+        "scent_notes": [
+            "Fruity",
+            "Sweet",
+            "Woody",
+            "Leather",
+            "Smoky",
+            "Citrus",
+            "Musky",
+            "Tropical",
+            "Fresh",
+            "Mossy"
+        ],
+        "variants": [
+            {
+                "id": "var_minokawa_50",
+                "title": "50ml",
+                "price": {
+                    "amount": "400.00",
+                    "currencyCode": "PHP"
+                }
+            },
+            {
+                "id": "var_minokawa_100",
+                "title": "100ml",
+                "price": {
+                    "amount": "750.00",
+                    "currencyCode": "PHP"
+                }
+            }
+        ],
+        "tags": [
+            "Fresh",
+            "Earthy",
+            "Sophisticated"
+        ]
+    },
+    {
+        "id": "prod_lakapati",
+        "title": "Lakapati",
+        "handle": "lakapati",
+        "description": "A serene dawn breaks over fields of gold, the air alive with the promise of gentle abundance and radiant joy. Lakapati is this blissful offering in a bottle – a luminous caress like pure sunshine on the skin. A sparkling cascade of light and airy sweetness opens, unfolding into a tender bloom of soft, delicate notes that speak of carefree days and heartwarming connections. This is the fragrance of bountiful serenity, a gentle whisper of happiness in a comforting, radiant embrace. Radiate your inner light. 🌸☀️🌾",
+        "price": {
+            "amount": "400.00",
+            "currencyCode": "PHP"
+        },
+        "images": [
+            {
+                "url": "/assets/lakapati.png",
+                "altText": "Lakapati Bottle"
+            }
+        ],
+        "scent_notes": [
+            "Citrus",
+            "Green",
+            "Aromatic",
+            "Marine",
+            "Woody"
+        ],
+        "variants": [
+            {
+                "id": "var_lakapati_50",
+                "title": "50ml",
+                "price": {
+                    "amount": "400.00",
+                    "currencyCode": "PHP"
+                }
+            },
+            {
+                "id": "var_lakapati_100",
+                "title": "100ml",
+                "price": {
+                    "amount": "750.00",
+                    "currencyCode": "PHP"
+                }
+            }
+        ],
+        "tags": [
+            "Floral",
+            "Radiant",
+            "Joyful"
+        ]
+    },
+    {
+        "id": "prod_anatala",
+        "title": "Anatala",
+        "handle": "anatala",
+        "description": "The vast expanse of the cosmos unfolds, where distant stars pulse with timeless energy and raw, untamed beauty. Anatala captures this profound mystery and noble spirit. A collision of elemental freshness, invigorating and boundless, greets the senses, then charts a course through a heart of deep, resonant accords. It settles into a sophisticated warmth that speaks of ancient wisdom and modern resolve – a scent of infinite possibility, an olfactory signature both powerfully elemental and impeccably refined. Your universe defined. 🌌🌠",
+        "price": {
+            "amount": "400.00",
+            "currencyCode": "PHP"
+        },
+        "images": [
+            {
+                "url": "/assets/anatala.png",
+                "altText": "Anatala Bottle"
+            }
+        ],
+        "scent_notes": [
+            "Fresh Spicy",
+            "Amber",
+            "Citrus",
+            "Aromatic",
+            "Musky",
+            "Woody",
+            "Lavender",
+            "Herbal",
+            "Warm Spicy"
+        ],
+        "variants": [
+            {
+                "id": "var_anatala_50",
+                "title": "50ml",
+                "price": {
+                    "amount": "400.00",
+                    "currencyCode": "PHP"
+                }
+            },
+            {
+                "id": "var_anatala_100",
+                "title": "100ml",
+                "price": {
+                    "amount": "750.00",
+                    "currencyCode": "PHP"
+                }
+            }
+        ],
+        "tags": [
+            "Mystery",
+            "Sophisticated",
+            "Elemental"
+        ]
+    },
+    {
+        "id": "prod_thaya",
+        "title": "Thaya",
+        "handle": "thaya",
+        "description": "A whisper of sweet enchantment, a playful dance of delightful notes that wraps you in a comforting, velvety embrace. Thaya opens with a soft blush of fruity brightness, like the first bite of a sun-ripened delicacy, before melting into a heart of creamy, caressing warmth. It's the scent of whispered secrets and cherished moments, a gentle trail of captivating sweetness that leaves a sprinkle of magic wherever you go. Embrace your charming side. 💖☁️",
+        "price": {
+            "amount": "400.00",
+            "currencyCode": "PHP"
+        },
+        "images": [
+            {
+                "url": "/assets/thaya.png",
+                "altText": "Thaya Bottle"
+            }
+        ],
+        "scent_notes": [
+            "Vanilla",
+            "White Floral",
+            "Fruity",
+            "Sweet",
+            "Powdery",
+            "Citrus",
+            "Aquatic",
+            "Fresh",
+            "Amber",
+            "Musky"
+        ],
+        "variants": [
+            {
+                "id": "var_thaya_50",
+                "title": "50ml",
+                "price": {
+                    "amount": "400.00",
+                    "currencyCode": "PHP"
+                }
+            },
+            {
+                "id": "var_thaya_100",
+                "title": "100ml",
+                "price": {
+                    "amount": "750.00",
+                    "currencyCode": "PHP"
+                }
+            }
+        ],
+        "tags": [
+            "Sweet",
+            "Encanting",
+            "Playful"
+        ]
+    },
+    {
+        "id": "prod_mayari",
+        "title": "Mayari",
+        "handle": "mayari",
+        "description": "Bask in the serene glow of Mayari, a fragrance that captures the quiet beauty of the moonlit night. It unfolds with a whisper of ethereal lightness, a gentle caress that soothes the spirit. As it blossoms, a delicate, dream-like sweetness emerges from its heart, reminiscent of night-blooming flowers and the softest, most comforting cosmic dust. It settles into a subtly radiant and alluring trail, a personal halo of tranquil mystique and tender grace. Embrace the moon's enchantment. 🌙✨🌸",
+        "price": {
+            "amount": "400.00",
+            "currencyCode": "PHP"
+        },
+        "images": [
+            {
+                "url": "/assets/mayari.png",
+                "altText": "Mayari Bottle"
+            }
+        ],
+        "scent_notes": [
+            "Sweet",
+            "Lactonic",
+            "Vanilla",
+            "Coconut",
+            "Musky"
+        ],
+        "variants": [
+            {
+                "id": "var_mayari_50",
+                "title": "50ml",
+                "price": {
+                    "amount": "400.00",
+                    "currencyCode": "PHP"
+                }
+            },
+            {
+                "id": "var_mayari_100",
+                "title": "100ml",
+                "price": {
+                    "amount": "750.00",
+                    "currencyCode": "PHP"
+                }
+            }
+        ],
+        "tags": [
+            "Serene",
+            "Ethereal",
+            "Floral"
+        ]
+    },
+    {
+        "id": "prod_sinaya",
+        "title": "Sinaya",
+        "handle": "sinaya",
+        "description": "A dynamic spark of vibrant clarity, a scent that captures the very essence of decisive action and poised ambition. It opens with an invigorating surge of crisp, untamed energy that sharpens the senses and awakens the spirit. This initial brilliance settles into a heart of profound, grounding woods, creating a trail of unwavering confidence and sophisticated resolve. Sinaya is not just a fragrance; it is the silent affirmation you wear before seizing your most important moments, a secret source of inner strength.",
+        "price": {
+            "amount": "400.00",
+            "currencyCode": "PHP"
+        },
+        "images": [
+            {
+                "url": "/assets/sinaya.png",
+                "altText": "Sinaya Bottle"
+            }
+        ],
+        "scent_notes": [
+            "Woody",
+            "Fruity",
+            "Green",
+            "Aromatic",
+            "Fresh",
+            "Patchouli",
+            "Earthy",
+            "Conifer",
+            "Balsamic",
+            "Warm Spicy"
+        ],
+        "variants": [
+            {
+                "id": "var_sinaya_50",
+                "title": "50ml",
+                "price": {
+                    "amount": "400.00",
+                    "currencyCode": "PHP"
+                }
+            },
+            {
+                "id": "var_sinaya_100",
+                "title": "100ml",
+                "price": {
+                    "amount": "750.00",
+                    "currencyCode": "PHP"
+                }
+            }
+        ],
+        "tags": [
+            "Dynamic",
+            "Woody",
+            "Confident"
+        ]
+    },
+    {
+        "id": "prod_mapulon",
+        "title": "Mapulon",
+        "handle": "mapulon",
+        "description": "The untamed spirit of the windswept shore, captured in a bottle. This fragrance is a serene escape, a connection to the elemental soul of nature. It greets you not with a shout, but with a whisper of crisp sea salt and the mineral scent of rugged earth, softened by the gentle wisdom of wild sage. Wearing Mapulon is an experience of tranquil strength and liberation, a reminder of open skies and the quiet power found in solitude. It’s a shared secret with the earth itself.",
+        "price": {
+            "amount": "400.00",
+            "currencyCode": "PHP"
+        },
+        "images": [
+            {
+                "url": "/assets/mapulon.png",
+                "altText": "Mapulon Bottle"
+            }
+        ],
+        "scent_notes": [
+            "Aromatic",
+            "Salty",
+            "Marine",
+            "Citrus",
+            "Musky",
+            "Herbal",
+            "Soft Spicy",
+            "Floral",
+            "Aquatic"
+        ],
+        "variants": [
+            {
+                "id": "var_mapulon_50",
+                "title": "50ml",
+                "price": {
+                    "amount": "400.00",
+                    "currencyCode": "PHP"
+                }
+            },
+            {
+                "id": "var_mapulon_100",
+                "title": "100ml",
+                "price": {
+                    "amount": "750.00",
+                    "currencyCode": "PHP"
+                }
+            }
+        ],
+        "tags": [
+            "Marine",
+            "Earthy",
+            "Serene"
+        ]
+    },
+    {
+        "id": "prod_hanan",
+        "title": "Hanan",
+        "handle": "hanan",
+        "description": "Like the first blush of a golden dawn, this scent is a luscious whisper of serene grace and tender beauty. It unfolds with the juicy, sun-drenched sweetness of just-ripened fruit, which then gracefully gives way to a heart of soft, delicate blooms, fresh and comforting. Hanan is an experience of effortless elegance, a scent that wears like a gentle halo of light. It’s an expression of quiet confidence and a compassionate embrace, perfect for moments of hopeful new beginnings.",
+        "price": {
+            "amount": "400.00",
+            "currencyCode": "PHP"
+        },
+        "images": [
+            {
+                "url": "/assets/hanan.png",
+                "altText": "Hanan Bottle"
+            }
+        ],
+        "scent_notes": [
+            "Floral",
+            "Fruity",
+            "Rose",
+            "Sweet",
+            "Aquatic",
+            "Musky",
+            "Fresh",
+            "Patchouli",
+            "Green",
+            "Powdery"
+        ],
+        "variants": [
+            {
+                "id": "var_hanan_50",
+                "title": "50ml",
+                "price": {
+                    "amount": "400.00",
+                    "currencyCode": "PHP"
+                }
+            },
+            {
+                "id": "var_hanan_100",
+                "title": "100ml",
+                "price": {
+                    "amount": "750.00",
+                    "currencyCode": "PHP"
+                }
+            }
+        ],
+        "tags": [
+            "Fruity",
+            "Floral",
+            "Elegant"
+        ]
+    },
+    {
+        "id": "prod_urduja",
+        "title": "Urduja",
+        "handle": "urduja",
+        "description": "A scent of quiet confidence and graceful strength. Urduja feels like a soft, powdery floral with a touch of morning dew, inspired by the poise of a legendary warrior princess. It’s an elegant and comforting fragrance that wears with a natural grace, perfect for moments that call for both compassion and resolve.",
+        "price": {
+            "amount": "400.00",
+            "currencyCode": "PHP"
+        },
+        "images": [
+            {
+                "url": "/assets/urduja.png",
+                "altText": "Urduja Bottle"
+            }
+        ],
+        "scent_notes": [
+            "Powdery Floral",
+            "Morning Dew",
+            "Natural Grace",
+            "Quiet Confidence"
+        ],
+        "variants": [
+            {
+                "id": "var_urduja_50",
+                "title": "50ml",
+                "price": {
+                    "amount": "400.00",
+                    "currencyCode": "PHP"
+                }
+            },
+            {
+                "id": "var_urduja_100",
+                "title": "100ml",
+                "price": {
+                    "amount": "750.00",
+                    "currencyCode": "PHP"
+                }
+            }
+        ],
+        "tags": [
+            "Floral",
+            "Powdery",
+            "Elegant"
+        ]
+    }
+]

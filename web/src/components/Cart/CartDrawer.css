@@ -1,0 +1,323 @@
+/* Cart Drawer Warm Theme Refactor */
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s var(--ease-out-expo);
+}
+
+.cart-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.cart-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    max-width: 480px;
+    height: 100vh;
+    background: var(--color-cream-base);
+    border-left: 1px solid var(--color-glass-border);
+    transform: translateX(100%);
+    transition: transform 0.6s var(--ease-out-expo);
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-drawer.open {
+    transform: translateX(0);
+}
+
+.cart-header {
+    padding: var(--space-xl);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--color-glass-border);
+}
+
+.cart-header h2 {
+    font-size: 2rem;
+    /* Was var(--font-size-xl) */
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    margin: 0;
+    color: var(--color-charcoal);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--color-charcoal-muted);
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: var(--color-charcoal);
+}
+
+.cart-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-xl);
+}
+
+/* Empty State */
+.empty-cart {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--color-charcoal-muted);
+}
+
+.empty-icon {
+    width: 64px;
+    height: 64px;
+    border: 1px solid var(--color-glass-border);
+    border-radius: 50%;
+    margin-bottom: var(--space-lg);
+    background: linear-gradient(135deg, var(--color-cream-surface), rgba(255, 255, 255, 0.5));
+}
+
+.continue-shopping-btn {
+    margin-top: var(--space-xl);
+    background: transparent;
+    border: 1px solid var(--color-charcoal);
+    color: var(--color-charcoal);
+    padding: 1rem 2rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.continue-shopping-btn:hover {
+    background: var(--color-charcoal);
+    color: var(--color-cream-base);
+}
+
+/* Cart Items */
+.cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+.cart-item {
+    display: flex;
+    gap: var(--space-lg);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--color-glass-border);
+}
+
+.item-image-container {
+    width: 80px;
+    height: 80px;
+    background: var(--color-cream-surface);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.item-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mix-blend-mode: normal;
+}
+
+.item-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.item-details h3 {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+    color: var(--color-charcoal);
+}
+
+.variant-title {
+    font-size: 0.75rem;
+    color: var(--color-charcoal-muted);
+    margin: var(--space-xs) 0;
+}
+
+.item-price {
+    font-size: 0.9rem;
+    color: var(--color-bronze);
+    margin-top: auto;
+}
+
+.item-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--space-sm);
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--color-glass-border);
+    border-radius: var(--radius-sm);
+}
+
+.quantity-selector button {
+    background: none;
+    border: none;
+    padding: 0.25rem 0.5rem;
+    color: var(--color-charcoal);
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.quantity-selector button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.quantity-selector button:hover:not(:disabled) {
+    background: rgba(58, 54, 51, 0.05);
+    /* Warm hover */
+}
+
+.quantity-selector span {
+    font-size: 0.9rem;
+    padding: 0 var(--space-xs);
+    min-width: 24px;
+    text-align: center;
+    color: var(--color-charcoal);
+}
+
+.remove-btn {
+    background: none;
+    border: none;
+    font-size: 0.75rem;
+    color: var(--color-charcoal-muted);
+    text-decoration: underline;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.remove-btn:hover {
+    color: #e74c3c;
+    /* Error color usually red, keeping explicit */
+}
+
+/* Footer */
+.cart-footer {
+    padding: var(--space-xl);
+    border-top: 1px solid var(--color-glass-border);
+    background: var(--color-cream-base);
+}
+
+.subtotal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-sm);
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--color-charcoal);
+}
+
+.shipping-note {
+    font-size: 0.75rem;
+    color: var(--color-charcoal-muted);
+    text-align: center;
+    margin-bottom: var(--space-lg);
+}
+
+.checkout-btn {
+    display: block;
+    width: 100%;
+    padding: 1.25rem;
+    background: var(--color-charcoal);
+    color: var(--color-cream-base);
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.checkout-btn:hover {
+    background: transparent;
+    color: var(--color-charcoal);
+    box-shadow: none;
+    border: 1px solid var(--color-charcoal);
+}
+
+/* Direct Payment Modal/Section within Cart */
+.direct-payment-info {
+    padding: var(--space-lg);
+    background: var(--color-cream-surface);
+    border: 1px solid var(--color-glass-border);
+    margin-bottom: var(--space-lg);
+    border-radius: var(--radius-sm);
+}
+
+.payment-methods {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: var(--space-sm);
+}
+
+.payment-badge {
+    padding: var(--space-xs) var(--space-sm);
+    background: #fff;
+    color: #000;
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.whatsapp-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: 1.25rem;
+    background: #25D366;
+    /* WhatsApp Green - brand color keep */
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.whatsapp-btn:hover {
+    background: #128C7E;
+    transform: translateY(-2px);
+}

@@ -1,0 +1,157 @@
+:root {
+  /* Brand Colors - Warm Luxury (Light Mode Core) */
+  --color-cream-base: #F5F2EC;
+  /* Warm Cream Background (Not White) */
+  --color-cream-surface: #EBE7DF;
+  /* Slightly Darker Cream for Cards/Surfaces */
+
+  /* Neutrals - Earth & Stone */
+  --color-charcoal: #3A3633;
+  /* Primary Text / Deep Earth */
+  --color-charcoal-muted: #6B665F;
+  /* Secondary Text / Stone */
+  --color-glass-border: rgba(58, 54, 51, 0.1);
+  /* Subtle dark border for light glass */
+
+  /* Accents */
+  --color-ivory: #FFFFFF;
+  /* Pure White Highlights (sparingly used) */
+  --color-bronze: #9C8C74;
+  /* Muted Bronze / Aged Gold */
+
+  /* Text Mappings */
+  --text-main: var(--color-charcoal);
+  --text-muted: var(--color-charcoal-muted);
+  --text-light: #F5F2EC;
+  /* For dark buttons/overlays */
+
+  /* Typography */
+  --font-heading: 'Garamond', 'Times New Roman', serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1.5rem;
+  --space-md: 3rem;
+  --space-lg: 6rem;
+  --space-xl: 10rem;
+
+  /* Effects */
+  --shadow-subtle: 0 10px 40px rgba(58, 54, 51, 0.05);
+  /* Soft warm shadow */
+  --shadow-float: 0 20px 60px rgba(58, 54, 51, 0.1);
+  --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  --glass-bg: rgba(245, 242, 236, 0.85);
+  /* Warm Frosted Glass */
+  --glass-border: 1px solid var(--color-glass-border);
+
+  /* Helper vars */
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --radius-sm: 4px;
+}
+
+/* Animations - Soft Gold Shimmer */
+@keyframes bronze-shimmer {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.text-shimmer {
+  background: linear-gradient(90deg,
+      #6B665F 0%,
+      #9C8C74 45%,
+      #3A3633 55%,
+      #6B665F 100%);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: bronze-shimmer 4s ease-in-out infinite;
+}
+
+/* Bronze Button - Warm Luxury Version */
+.btn-bronze {
+  padding: 1rem 3rem;
+  border: 1px solid var(--color-glass-border);
+  background: rgba(255, 255, 255, 0.4);
+  color: var(--color-charcoal);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+}
+
+.btn-bronze::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right,
+      transparent 0%,
+      rgba(255, 255, 255, 0.6) 50%,
+      transparent 100%);
+  transform: skewX(-25deg);
+  transition: all 0.7s ease;
+}
+
+.btn-bronze:hover::after {
+  left: 150%;
+}
+
+.btn-bronze:hover {
+  background: var(--color-charcoal);
+  color: var(--color-cream-base);
+  border-color: var(--color-charcoal);
+  box-shadow: 0 0 30px rgba(156, 140, 116, 0.2);
+  /* Bronze shadow */
+  transform: translateY(-2px);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-cream-base);
+  color: var(--text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--color-charcoal);
+  /* Was Ivory */
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
