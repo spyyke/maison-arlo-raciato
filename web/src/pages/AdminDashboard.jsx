@@ -1,7 +1,8 @@
 import { supabase } from '../supabaseClient';
-import { useNavigate } from 'react-router-dom'; // Assuming useNavigate is imported
-import { useState, useEffect } from 'react'; // Assuming useState and useEffect are imported
-import * as ProductService from '../services/productService'; // Assuming ProductService is imported
+import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import * as ProductService from '../services/productService';
+import './AdminDashboard.css';
 
 const AdminDashboard = () => {
     const navigate = useNavigate();
@@ -34,6 +35,7 @@ const AdminDashboard = () => {
                     .select('*')
                     .order('created_at', { ascending: false });
 
+                console.log("Supabase Orders:", data, error); // DEBUG LOG
                 if (error) throw error;
                 setOrders(data || []);
 
