@@ -10,20 +10,20 @@ const createHandle = (name) => {
 const mapSupabaseToProduct = (row) => {
   return {
     id: row.id,
-    title: row.name,
-    handle: createHandle(row.name),
+    title: row.name, // Correctly mapped from 'name' to 'title'
+    handle: row.handle || createHandle(row.name),
     description: row.description,
     availableForSale: row.quantity_available > 0,
     variants: [
       {
-        id: row.id, // Use product ID as variant ID for simple products
+        id: row.id,
         title: 'Default Title',
         price: {
           amount: row.price,
           currencyCode: 'PHP'
         },
         quantityAvailable: row.quantity_available,
-        inventory_quantity: row.quantity_available // Keep raw value for logic
+        inventory_quantity: row.quantity_available
       }
     ],
     images: [
