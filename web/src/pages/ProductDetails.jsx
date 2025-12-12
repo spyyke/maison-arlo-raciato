@@ -101,9 +101,15 @@ const ProductDetails = () => {
                             <h3 className="scent-notes-title">Olfactory Composition</h3>
                             <OlfactoryPyramid notes={product.scent_notes} />
                         </div>
-                    )}
+
 
                     <div className="product-actions">
+                        {selectedVariant?.inventory_quantity < 10 && selectedVariant?.inventory_quantity > 0 && (
+                            <div className="low-stock-alert" style={{ color: '#d35400', marginBottom: '1rem', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                <span style={{ fontSize: '1.2em' }}>🔥</span>
+                                <span>Only {selectedVariant.inventory_quantity} left! Order soon.</span>
+                            </div>
+                        )}
 
                         <div className="buttons-row" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
                             <div className="quantity-selector" style={{ display: 'flex', alignItems: 'center', border: '1px solid #ddd', borderRadius: '4px' }}>
