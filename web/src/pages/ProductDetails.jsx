@@ -13,6 +13,7 @@ const ProductDetails = () => {
     const { addToCart, isAdding } = useCart();
 
     const [selectedVariantId, setSelectedVariantId] = useState(null);
+    const [quantity, setQuantity] = useState(1);
 
     const { data: product, isLoading: loading, error } = useQuery({
         queryKey: ['product', handle],
@@ -45,7 +46,7 @@ const ProductDetails = () => {
 
     const handleAddToCart = () => {
         if (selectedVariant) {
-            addToCart(selectedVariant.id, 1, {
+            addToCart(selectedVariant.id, quantity, {
                 title: product.title,
                 variantTitle: selectedVariant.title,
                 price: parseFloat(selectedVariant.price.amount),
@@ -103,12 +104,24 @@ const ProductDetails = () => {
                     )}
 
                     <div className="product-actions">
-                        <div className="buttons-row" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+
+                        <div className="buttons-row" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                            <div className="quantity-selector" style={{ display: 'flex', alignItems: 'center', border: '1px solid #ddd', borderRadius: '4px' }}>
+                                <button
+                                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                                    style={{ padding: '0.5rem 1rem', background: 'transparent', border: 'none', cursor: 'pointer' }}
+                                >-</button>
+                                <span style={{ padding: '0 0.5rem', minWidth: '2rem', textAlign: 'center' }}>{quantity}</span>
+                                <button
+                                    onClick={() => setQuantity(quantity + 1)}
+                                    style={{ padding: '0.5rem 1rem', background: 'transparent', border: 'none', cursor: 'pointer' }}
+                                >+</button>
+                            </div>
                             <button
                                 className="add-to-cart-btn btn-primary"
                                 onClick={handleAddToCart}
                                 disabled={isAdding}
-                                style={{ flex: 1, minWidth: '200px' }}
+                                style={{ flex: 1, minWidth: '150px' }}
                             >
                                 {isAdding ? 'Adding...' : 'Add to Cart'}
                             </button>

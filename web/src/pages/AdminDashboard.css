@@ -1,0 +1,96 @@
+.admin-dashboard {
+    background-color: #f4f6f8;
+    min-height: 100vh;
+}
+
+.admin-header {
+    background: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.admin-header h2 {
+    font-size: 1.2rem;
+    color: #333;
+    margin: 0;
+}
+
+.logout-btn {
+    background: transparent;
+    border: 1px solid #ccc;
+    padding: 6px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.admin-content {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.orders-table-container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+}
+
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.orders-table th,
+.orders-table td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.orders-table th {
+    background-color: #f9f9f9;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.status-badge.pending {
+    background: #fff3e0;
+    color: #e65100;
+}
+
+.status-badge.shipped {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+.status-badge.delivered {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.action-btn {
+    background: transparent;
+    color: #1976d2;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0;
+}
+
+.action-btn:hover {
+    text-decoration: underline;
+}

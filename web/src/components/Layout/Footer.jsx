@@ -37,7 +37,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className="footer-bottom">
-                <p>&copy; {new Date().getFullYear()} Maison Arlo Raciàto. All rights reserved.</p>
+                <p>&copy; {new Date().getFullYear()} Maison Arlo Raciàto. All rights reserved. <a href="/admin" style={{ color: 'inherit', textDecoration: 'none', opacity: 0.5, marginLeft: '10px', fontSize: '0.8em' }}>Admin</a></p>
             </div>
         </footer>
     );

@@ -1,0 +1,11 @@
+
+/node_modules
+/src
+/public
+.git
+.gitignore
+.DS_Store
+package.json
+package-lock.json
+README.md
+vite.config.js

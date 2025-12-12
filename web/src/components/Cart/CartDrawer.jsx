@@ -61,7 +61,14 @@ const CartDrawer = () => {
                     items: items,
                     total_price: total,
                     delivery_type: deliveryType,
-                    shipping_fee: shippingFee
+                    shipping_fee: shippingFee,
+                    delivery_address: {
+                        line1: document.getElementById('delivery-address')?.value || '',
+                        city: document.getElementById('delivery-city')?.value || '',
+                        barangay: document.getElementById('delivery-barangay')?.value || '',
+                        postal_code: document.getElementById('delivery-postal')?.value || ''
+                    },
+                    payment_method: document.querySelector('input[name="payment_method"]:checked')?.value || 'card'
                 })
             });
 
@@ -113,6 +120,16 @@ const CartDrawer = () => {
                                     </div>
 
                                     <div className="form-group">
+                                        <label>Delivery Address</label>
+                                        <input type="text" id="delivery-address" placeholder="Street Address / Building" />
+                                        <div className="form-row" style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem' }}>
+                                            <input type="text" id="delivery-city" placeholder="City" style={{ flex: 1 }} />
+                                            <input type="text" id="delivery-barangay" placeholder="Barangay" style={{ flex: 1 }} />
+                                        </div>
+                                        <input type="text" id="delivery-postal" placeholder="Postal Code" style={{ marginTop: '0.5rem' }} />
+                                    </div>
+
+                                    <div className="form-group">
                                         <label>Delivery Type</label>
                                         <select id="delivery-type">
                                             <option value="office_pickup">Office Pickup (Free)</option>
@@ -122,10 +139,19 @@ const CartDrawer = () => {
 
                                     <div className="payment-info">
                                         <p className="secure-badge">🔒 Secure Payment by PayMongo</p>
-                                        <div className="payment-methods">
-                                            <span className="payment-badge">GCash</span>
-                                            <span className="payment-badge">Maya</span>
-                                            <span className="payment-badge">Cards</span>
+                                        <div className="payment-methods-select">
+                                            <label className="payment-option">
+                                                <input type="radio" name="payment_method" value="card" defaultChecked />
+                                                <span>Credit/Debit Card</span>
+                                            </label>
+                                            <label className="payment-option">
+                                                <input type="radio" name="payment_method" value="gcash" />
+                                                <span>GCash</span>
+                                            </label>
+                                            <label className="payment-option">
+                                                <input type="radio" name="payment_method" value="maya" />
+                                                <span>Maya</span>
+                                            </label>
                                         </div>
                                     </div>
 
