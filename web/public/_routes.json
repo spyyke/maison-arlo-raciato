@@ -4,7 +4,7 @@
         "/*"
     ],
     "exclude": [
-        "/admin/*",
+
         "/sys-admin/*",
         "/assets/*"
     ]
