@@ -1,0 +1,10 @@
+name = "maison-arlo-raciato-web"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = "dist"
+
+[vars]
+# Public variables can go here, secrets should be set via `wrangler secret put`
+
+[[kv_namespaces]]
+# binding = "MY_KV_NAMESPACE"
+# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"

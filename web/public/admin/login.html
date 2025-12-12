@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Davao Perfume</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f5f5f5;
+            margin: 0;
+        }
+
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-box">
+        <h1>Admin Login</h1>
+        <input type="password" id="password" placeholder="Enter admin password">
+        <button onclick="loginAdmin()">Login</button>
+    </div>
+
+    <script>
+        function loginAdmin() {
+            const password = document.getElementById('password').value;
+            // TODO: Change this to a secure environment variable or stronger mechanism in production
+            const correctPassword = 'Eyespyke110321';
+
+            if (password === correctPassword) {
+                sessionStorage.setItem('adminLoggedIn', 'true');
+                window.location.href = '/admin/dashboard.html';
+            } else {
+                alert('Incorrect password');
+            }
+        }
+
+        if (sessionStorage.getItem('adminLoggedIn')) {
+            window.location.href = '/admin/dashboard.html';
+        }
+    </script>
+</body>
+
+</html>

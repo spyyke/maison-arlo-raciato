@@ -1,5 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { supabase } from '../supabaseClient';
 
 const CartContext = createContext();
 
@@ -33,8 +34,39 @@ export const CartProvider = ({ children }) => {
         }, 0);
     };
 
-    const addToCart = (variantId, quantity = 1, productDetails) => {
+    const addToCart = async (variantId, quantity = 1, productDetails) => {
         setIsAdding(true);
+
+        try {
+            // Check stock with Supabase
+            // Note: variantId is expected to be the Product ID in our simple schema
+            const { data, error } = await supabase
+                .from('perfumes')
+                .select('quantity_available')
+                .eq('id', variantId)
+                .single();
+
+            if (!error && data) {
+                const currentInCart = cart.items.find(item => item.variantId === variantId)?.quantity || 0;
+                if (data.quantity_available < (currentInCart + quantity)) {
+                    alert(`Sorry, only ${data.quantity_available} left in stock.`);
+                    setIsAdding(false);
+                    return;
+                }
+            }
+        } catch (error) {
+            console.warn("Stock check failed or skipped (using fallback):", error);
+            // Fallback to productDetails inventory if available
+            if (productDetails && productDetails.inventory_quantity !== undefined) {
+                const currentInCart = cart.items.find(item => item.variantId === variantId)?.quantity || 0;
+                if (productDetails.inventory_quantity < (currentInCart + quantity)) {
+                    alert(`Sorry, only ${productDetails.inventory_quantity} left in stock.`);
+                    setIsAdding(false);
+                    return;
+                }
+            }
+        }
+
         // Simulate a small delay for better UX (feedback)
         setTimeout(() => {
             setCart(prevCart => {
@@ -109,4 +141,3 @@ export const CartProvider = ({ children }) => {
         </CartContext.Provider>
     );
 };
-
