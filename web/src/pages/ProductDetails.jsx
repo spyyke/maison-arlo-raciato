@@ -101,6 +101,7 @@ const ProductDetails = () => {
                             <h3 className="scent-notes-title">Olfactory Composition</h3>
                             <OlfactoryPyramid notes={product.scent_notes} />
                         </div>
+                    )}
 
 
                     <div className="product-actions">
