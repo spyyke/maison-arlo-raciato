@@ -11,7 +11,9 @@ const AdminLogin = () => {
         e.preventDefault();
         // Simple mock authentication for now, as per implementation plan.
         // In a real app, this would call api/admin/auth
-        if (password === 'admin123' || password === 'maison2024') {
+        // Check against environment variable
+        const correctPassword = import.meta.env.VITE_ADMIN_PASSWORD;
+        if (password === correctPassword) {
             localStorage.setItem('adminToken', 'mock-session-token');
             navigate('/admin/dashboard');
         } else {
