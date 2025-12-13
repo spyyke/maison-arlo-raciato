@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useCart } from '../../context/CartContext';
+import { useToast } from '../UI/Toast';
 import './CartDrawer.css';
 
 const CartDrawer = () => {
@@ -10,6 +11,7 @@ const CartDrawer = () => {
         removeFromCart,
         updateQuantity
     } = useCart();
+    const { showToast } = useToast();
 
     const [isVisible, setIsVisible] = useState(false);
     const [showCheckout, setShowCheckout] = useState(false);
@@ -43,7 +45,7 @@ const CartDrawer = () => {
         const deliveryType = document.getElementById('delivery-type').value;
 
         if (!name || !email || !phone) {
-            alert("Please fill in all details.");
+            showToast("Please fill in all details.", 'error');
             return;
         }
 
@@ -77,12 +79,12 @@ const CartDrawer = () => {
             if (result.success && result.checkout_url) {
                 window.location.href = result.checkout_url;
             } else {
-                alert("Payment initiation failed: " + (result.error || "Unknown error"));
+                showToast("Payment initiation failed: " + (result.error || "Unknown error"), 'error');
             }
 
         } catch (error) {
             console.error("Checkout error:", error);
-            alert("An error occurred. Please try again.");
+            showToast("An error occurred. Please try again.", 'error');
         }
     };
 
@@ -122,11 +124,11 @@ const CartDrawer = () => {
                                     <div className="form-group">
                                         <label>Delivery Address</label>
                                         <input type="text" id="delivery-address" placeholder="Street Address / Building" />
-                                        <div className="form-row" style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem' }}>
-                                            <input type="text" id="delivery-city" placeholder="City" style={{ flex: 1 }} />
-                                            <input type="text" id="delivery-barangay" placeholder="Barangay" style={{ flex: 1 }} />
+                                        <div className="form-row">
+                                            <input type="text" id="delivery-city" placeholder="City" className="form-row-input" />
+                                            <input type="text" id="delivery-barangay" placeholder="Barangay" className="form-row-input" />
                                         </div>
-                                        <input type="text" id="delivery-postal" placeholder="Postal Code" style={{ marginTop: '0.5rem' }} />
+                                        <input type="text" id="delivery-postal" placeholder="Postal Code" className="form-input-margin" />
                                     </div>
 
                                     <div className="form-group">
@@ -161,7 +163,7 @@ const CartDrawer = () => {
                                 </form>
                             </div>
 
-                            <button className="continue-shopping-btn" style={{ marginTop: '1rem', width: '100%', border: 'none' }} onClick={() => setShowCheckout(false)}>
+                            <button className="continue-shopping-btn checkout-back-btn" onClick={() => setShowCheckout(false)}>
                                 ← Back to Cart
                             </button>
                         </div>
@@ -191,7 +193,7 @@ const CartDrawer = () => {
                                             </div>
                                             <p className="item-price">{item.currency || 'PHP'} {parseFloat(item.price).toLocaleString()}</p>
                                         </div>
-                                        <button className="remove-btn" onClick={() => removeFromCart(item.variantId)} style={{ alignSelf: 'flex-start', marginTop: '0.5rem' }}>Remove</button>
+                                        <button className="remove-btn item-remove-btn" onClick={() => removeFromCart(item.variantId)}>Remove</button>
                                     </div>
                                 </div>
                             ))}

@@ -1,7 +1,8 @@
+import React from 'react';
 import Navbar from './Navbar';
-import CartDrawer from '../Cart/CartDrawer';
 import Footer from './Footer';
-
+import CartDrawer from '../Cart/CartDrawer';
+import { ToastProvider } from '../UI/Toast';
 import { useLocation } from 'react-router-dom';
 
 const Layout = ({ children }) => {
@@ -9,14 +10,14 @@ const Layout = ({ children }) => {
     const isAdmin = location.pathname.startsWith('/admin');
 
     return (
-        <>
+        <ToastProvider>
             {!isAdmin && <Navbar />}
             {!isAdmin && <CartDrawer />}
             <main>
                 {children}
             </main>
             {!isAdmin && <Footer />}
-        </>
+        </ToastProvider>
     );
 };
 

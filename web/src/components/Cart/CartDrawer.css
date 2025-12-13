@@ -26,7 +26,8 @@
     width: 100%;
     max-width: 500px;
     height: 100vh;
-    height: 100dvh; /* Use dynamic viewport height for mobile browsers */
+    height: 100dvh;
+    /* Use dynamic viewport height for mobile browsers */
     background: var(--color-cream-base);
     border-left: 1px solid var(--color-glass-border);
     transform: translateX(100%);
@@ -48,10 +49,12 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid var(--color-glass-border);
-    background: rgba(245, 242, 236, 0.95); /* Little less transparent */
+    background: rgba(245, 242, 236, 0.95);
+    /* Little less transparent */
     backdrop-filter: blur(10px);
     z-index: 10;
-    flex-shrink: 0; /* Important: Header shouldn't shrink */
+    flex-shrink: 0;
+    /* Important: Header shouldn't shrink */
 }
 
 .cart-header h2 {
@@ -62,7 +65,8 @@
     margin: 0;
     color: var(--color-charcoal);
     font-style: italic;
-    white-space: nowrap; /* Prevent awkward wrapping like 'Your \n Selection' */
+    white-space: nowrap;
+    /* Prevent awkward wrapping like 'Your \n Selection' */
 }
 
 .close-btn {
@@ -94,7 +98,8 @@
     padding: var(--space-md);
     scrollbar-width: thin;
     scrollbar-color: var(--color-glass-border) transparent;
-    min-height: 0; /* Important for flex container scrolling */
+    min-height: 0;
+    /* Important for flex container scrolling */
 }
 
 .cart-content::-webkit-scrollbar {
@@ -176,6 +181,7 @@
         opacity: 0;
         transform: translateY(10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -301,18 +307,19 @@
     padding: var(--space-md);
     border-top: 1px solid var(--color-glass-border);
     background: var(--color-cream-base);
-    flex-shrink: 0; /* Important: Prevent footer shrink */
+    flex-shrink: 0;
+    /* Important: Prevent footer shrink */
     z-index: 20;
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.02);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.02);
 }
 
 .subtotal {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: var(--space-sm);
     font-family: var(--font-heading);
+    font-size: 1.2rem;
     color: var(--color-charcoal);
+    margin-bottom: 0.5rem;
 }
 
 .subtotal span:first-child {
@@ -329,8 +336,44 @@
     font-size: 0.8rem;
     color: var(--color-charcoal-muted);
     text-align: center;
-    margin-bottom: var(--space-md);
-    opacity: 0.8;
+    margin-bottom: 1.5rem;
+}
+
+/* Form Styles */
+.form-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.form-row-input {
+    flex: 1;
+}
+
+.form-input-margin {
+    margin-top: 0.5rem;
+}
+
+.checkout-back-btn {
+    margin-top: 1rem;
+    width: 100%;
+    border: none;
+    background: transparent;
+    color: var(--color-charcoal-muted);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.checkout-back-btn:hover {
+    color: var(--color-charcoal);
+    text-decoration: underline;
+}
+
+/* Item Controls */
+.item-remove-btn {
+    align-self: flex-start;
+    margin-top: 0.5rem;
 }
 
 .checkout-btn {
@@ -391,7 +434,8 @@
     letter-spacing: 0.05em;
 }
 
-.form-group input, .form-group select {
+.form-group input,
+.form-group select {
     width: 100%;
     padding: 10px;
     border: 1px solid var(--color-glass-border);
@@ -402,7 +446,8 @@
     color: var(--color-charcoal);
 }
 
-.form-group input:focus, .form-group select:focus {
+.form-group input:focus,
+.form-group select:focus {
     outline: none;
     border-color: var(--color-charcoal);
     background: white;

@@ -2,42 +2,56 @@
 
 :root {
   /* --- Brand Colors: Warm Luxury --- */
-  
+
   /* Bases */
-  --color-cream-base: #F9F7F2;      /* Lighter, cleaner cream for main background */
-  --color-cream-surface: #F0EBE0;   /* Slightly deeper cream for cards/sections */
-  
+  --color-cream-base: #F9F7F2;
+  /* Lighter, cleaner cream for main background */
+  --color-cream-surface: #F0EBE0;
+  /* Slightly deeper cream for cards/sections */
+
   /* Text & Depth */
-  --color-charcoal: #2C2825;        /* Deep, rich charcoal (almost black brown) */
-  --color-charcoal-muted: #6E6A66;  /* Elegant stone grey for secondary text */
-  
+  --color-charcoal: #2C2825;
+  /* Deep, rich charcoal (almost black brown) */
+  --color-charcoal-muted: #6E6A66;
+  /* Elegant stone grey for secondary text */
+
   /* Accents */
-  --color-bronze: #9C8C74;          /* Metallic, muted bronze for highlights */
-  --color-bronze-light: #B8AA96;    /* Lighter bronze for hover states */
-  --color-ivory: #FFFFFF;           /* Pure white for strict contrast */
-  
+  --color-bronze: #9C8C74;
+  /* Metallic, muted bronze for highlights */
+  --color-bronze-light: #B8AA96;
+  /* Lighter bronze for hover states */
+  --color-ivory: #FFFFFF;
+  /* Pure white for strict contrast */
+
   /* Functional */
   --color-glass-border: rgba(44, 40, 37, 0.08);
-  --glass-bg: rgba(249, 247, 242, 0.85); /* Matches cream base */
-  
+  --glass-bg: rgba(249, 247, 242, 0.85);
+  /* Matches cream base */
+
   /* --- Typography --- */
   --font-heading: 'Playfair Display', serif;
   --font-body: 'Inter', sans-serif;
-  
+
   /* --- Spacing System --- */
-  --space-xs: 0.5rem;   /* 8px */
-  --space-sm: 1.5rem;   /* 24px */
-  --space-md: 3rem;     /* 48px */
-  --space-lg: 6rem;     /* 96px */
-  --space-xl: 10rem;    /* 160px */
-  
+  --space-xs: 0.5rem;
+  /* 8px */
+  --space-sm: 1.5rem;
+  /* 24px */
+  --space-md: 3rem;
+  /* 48px */
+  --space-lg: 6rem;
+  /* 96px */
+  --space-xl: 10rem;
+  /* 160px */
+
   /* --- Effects --- */
-  --radius-sm: 2px;     /* Sharp, premium corners */
+  --radius-sm: 2px;
+  /* Sharp, premium corners */
   --radius-md: 4px;
-  
+
   --shadow-subtle: 0 10px 40px rgba(44, 40, 37, 0.04);
   --shadow-float: 0 20px 60px rgba(44, 40, 37, 0.08);
-  
+
   --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
 }
@@ -65,9 +79,15 @@ body {
 }
 
 /* Typography Hierarchy */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
-  font-weight: 400; /* Elegant, not bold */
+  font-weight: 400;
+  /* Elegant, not bold */
   color: var(--color-charcoal);
   letter-spacing: -0.02em;
 }
@@ -83,6 +103,8 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 9999;
   opacity: 0.04;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  transform: translate3d(0, 0, 0);
+  /* Force GPU Layer */
 }
 
 /* Bronze Button */
@@ -130,8 +152,13 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Shimmer Animation */
 @keyframes bronze-shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
 }
 
 .text-shimmer {
@@ -151,7 +178,8 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: center;
   align-items: center;
   position: fixed;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   z-index: 999;
   background-color: var(--color-cream-base);
 }
@@ -166,6 +194,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @keyframes pulse-load {
-  0%, 100% { opacity: 0.4; transform: scale(0.98); }
-  50% { opacity: 1; transform: scale(1); }
+
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.98);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

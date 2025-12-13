@@ -2,11 +2,11 @@ import React, { useRef, useState } from 'react';
 
 const ProductBottle = ({ src, alt }) => {
     const containerRef = useRef(null);
-    const [rotation, setRotation] = useState({ x: 0, y: 0 });
-    const [shine, setShine] = useState({ x: 50, y: 50 });
+    const contentRef = useRef(null);
+    const overlayRef = useRef(null);
 
     const handleMouseMove = (e) => {
-        if (!containerRef.current) return;
+        if (!containerRef.current || !contentRef.current || !overlayRef.current) return;
 
         const rect = containerRef.current.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -19,17 +19,31 @@ const ProductBottle = ({ src, alt }) => {
         const rotateY = ((x - centerX) / centerX) * 10;
         const rotateX = -((y - centerY) / centerY) * 10;
 
-        setRotation({ x: rotateX, y: rotateY });
+        // Direct DOM Update (No React Render)
+        requestAnimationFrame(() => {
+            if (contentRef.current) {
+                contentRef.current.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            }
 
-        // Calculate shine position (opposite to mouse)
-        const shineX = 100 - (x / rect.width) * 100;
-        const shineY = 100 - (y / rect.height) * 100;
-        setShine({ x: shineX, y: shineY });
+            // Calculate shine position
+            const shineX = 100 - (x / rect.width) * 100;
+            const shineY = 100 - (y / rect.height) * 100;
+
+            if (overlayRef.current) {
+                overlayRef.current.style.backgroundImage = `radial-gradient(circle at ${shineX}% ${shineY}%, rgba(255,255,255,0.3) 0%, transparent 60%), linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%, rgba(255,255,255,0.1) 100%)`;
+            }
+        });
     };
 
     const handleMouseLeave = () => {
-        setRotation({ x: 0, y: 0 });
-        setShine({ x: 50, y: 50 });
+        requestAnimationFrame(() => {
+            if (contentRef.current) {
+                contentRef.current.style.transform = `rotateX(0deg) rotateY(0deg)`;
+            }
+            if (overlayRef.current) {
+                overlayRef.current.style.backgroundImage = 'none'; // Or default shine
+            }
+        });
     };
 
     return (
@@ -50,13 +64,15 @@ const ProductBottle = ({ src, alt }) => {
         >
             <div
                 className="bottle-content"
+                ref={contentRef}
                 style={{
-                    transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
+                    transform: 'rotateX(0deg) rotateY(0deg)', // Initial state
                     transition: 'transform 0.1s ease-out',
                     position: 'relative',
                     width: 'fit-content',
                     height: 'fit-content',
-                    transformStyle: 'preserve-3d'
+                    transformStyle: 'preserve-3d',
+                    willChange: 'transform' // Hint browser
                 }}
             >
                 <img
@@ -66,7 +82,6 @@ const ProductBottle = ({ src, alt }) => {
                         maxWidth: '100%',
                         height: 'auto',
                         display: 'block',
-                        // Simple drop shadow for depth
                         filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.2))'
                     }}
                 />
@@ -74,13 +89,14 @@ const ProductBottle = ({ src, alt }) => {
                 {/* Glass Reflection / Shine Overlay */}
                 <div
                     className="glass-overlay"
+                    ref={overlayRef}
                     style={{
                         position: 'absolute',
                         top: 0,
                         left: 0,
                         width: '100%',
                         height: '100%',
-                        backgroundImage: `radial-gradient(circle at ${shine.x}% ${shine.y}%, rgba(255,255,255,0.3) 0%, transparent 60%), linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 60%, rgba(255,255,255,0.1) 100%)`,
+                        // Init empty or default
                         mixBlendMode: 'soft-light',
                         pointerEvents: 'none',
                         opacity: 0.8
@@ -93,7 +109,7 @@ const ProductBottle = ({ src, alt }) => {
                         position: 'absolute',
                         inset: 0,
                         border: '1px solid rgba(255,255,255,0.2)',
-                        borderRadius: '2px', /* Approximate bottle shape if simple */
+                        borderRadius: '2px',
                         pointerEvents: 'none',
                         opacity: 0.5
                     }}
