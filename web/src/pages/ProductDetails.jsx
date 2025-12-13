@@ -71,6 +71,7 @@ const ProductDetails = () => {
                 <div className="product-details-info">
                     <div className="product-details-header">
                         <span className="product-brand-subtitle">Maison Arlo Raciàto</span>
+                        {product.category && <span className="product-category-eyebrow">{product.category} Collection</span>}
                         <h1 className="product-details-title text-shimmer">{product.title}</h1>
                         <span className="product-details-price">
                             {formatPrice(priceAmount, currencyCode)}
@@ -106,9 +107,9 @@ const ProductDetails = () => {
 
                     <div className="product-actions">
                         {selectedVariant?.inventory_quantity < 10 && selectedVariant?.inventory_quantity > 0 && (
-                            <div className="low-stock-alert" style={{ color: '#d35400', marginBottom: '1rem', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                <span style={{ fontSize: '1.2em' }}>🔥</span>
-                                <span>Only {selectedVariant.inventory_quantity} left! Order soon.</span>
+                            <div className="stock-alert-container">
+                                <span className="stock-alert-icon">●</span>
+                                <span className="stock-alert-text">Low Stock: Only {selectedVariant.inventory_quantity} remaining</span>
                             </div>
                         )}
 

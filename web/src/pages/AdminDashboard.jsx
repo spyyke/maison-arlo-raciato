@@ -60,6 +60,7 @@ const AdminDashboard = () => {
         tags: '',
         imageUrl: '',
         size: '50ml',
+        category: 'Signature', // Default category
         handle: '' // Optional override or for adding variant to existing
     });
 
@@ -312,7 +313,8 @@ const AdminDashboard = () => {
                 // We should re-fetch to let the grouping logic run if we added a variant to existing handle
                 await fetchData();
                 setShowAddProductModal(false);
-                setNewProduct({ title: '', description: '', price: '', quantity: '', tags: '', imageUrl: '', size: '50ml', handle: '' });
+                setShowAddProductModal(false);
+                setNewProduct({ title: '', description: '', price: '', quantity: '', tags: '', imageUrl: '', size: '50ml', category: 'Signature', handle: '' });
                 alert("Product created successfully!");
             }
         } catch (error) {
@@ -330,6 +332,7 @@ const AdminDashboard = () => {
             tags: product.tags.join(', ').replace(/Note: /g, ''),
             imageUrl: product.images[0]?.url || '',
             size: '100ml', // Default to next common size
+            category: product.category || 'Signature',
             handle: product.handle // Critical: Link to existing handle
         });
         setShowAddProductModal(true);
@@ -464,7 +467,7 @@ const AdminDashboard = () => {
                             <div className="card-header">
                                 <h3>Order Status Distribution</h3>
                             </div>
-                            <div className="chart-container" style={{ height: '220px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <div className="chart-container" style={{ height: '250px' }}>
                                 <ResponsiveContainer width="100%" height="100%">
                                     <PieChart>
                                         <Pie
@@ -479,7 +482,7 @@ const AdminDashboard = () => {
                                             ))}
                                         </Pie>
                                         <Tooltip />
-                                        <Legend verticalAlign="middle" align="right" layout="vertical" iconType="circle" />
+                                        <Legend verticalAlign="middle" align="bottom" layout="horizontal" iconType="circle" />
                                     </PieChart>
                                 </ResponsiveContainer>
                             </div>
@@ -492,14 +495,14 @@ const AdminDashboard = () => {
                             </div>
                             <div className="top-products-list">
                                 {topProducts.map((p, idx) => (
-                                    <div key={idx} className="top-product-item" style={{ display: 'flex', justifyContent: 'space-between', padding: '0.75rem 0', borderBottom: '1px solid #f5f5f5' }}>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                            <span style={{ fontWeight: 'bold', width: '20px', color: '#C5A47E' }}>#{idx + 1}</span>
-                                            <span>{p.name}</span>
+                                    <div key={idx} className="top-product-item">
+                                        <div className="top-product-left">
+                                            <span className="rank-badge">#{idx + 1}</span>
+                                            <span className="font-medium">{p.name}</span>
                                         </div>
-                                        <div style={{ textAlign: 'right' }}>
-                                            <div style={{ fontWeight: 'bold' }}>{p.qty} sold</div>
-                                            <div style={{ fontSize: '0.8rem', color: '#999' }}>₱{p.revenue.toLocaleString()}</div>
+                                        <div className="top-product-right">
+                                            <div className="qty-sold">{p.qty} sold</div>
+                                            <div className="revenue-sub">₱{p.revenue.toLocaleString()}</div>
                                         </div>
                                     </div>
                                 ))}
@@ -512,16 +515,16 @@ const AdminDashboard = () => {
                                 <h3>Quick Actions</h3>
                             </div>
                             <div className="quick-actions">
-                                <button className="primary-btn full-width" style={{ marginBottom: '0.75rem' }} onClick={() => setShowManualOrderModal(true)}>
+                                <button className="primary-btn full-width spacer-bottom" onClick={() => setShowManualOrderModal(true)}>
                                     + Create Manual Order (POS)
                                 </button>
                                 <button className="secondary-btn full-width" onClick={() => {
-                                    setNewProduct({ title: '', description: '', price: '', quantity: '', tags: '', imageUrl: '', size: '50ml', handle: '' });
+                                    setNewProduct({ title: '', description: '', price: '', quantity: '', tags: '', imageUrl: '', size: '50ml', category: 'Signature', handle: '' });
                                     setShowAddProductModal(true);
                                 }}>
                                     + Add New Product
                                 </button>
-                                <button className="secondary-btn full-width" style={{ marginTop: '0.75rem', borderColor: '#999', color: '#666' }} onClick={exportOrdersToCSV}>
+                                <button className="secondary-btn full-width spacer-top text-muted border-muted" onClick={exportOrdersToCSV}>
                                     ⬇ Export Orders to CSV
                                 </button>
                             </div>
@@ -533,15 +536,15 @@ const AdminDashboard = () => {
 
                         {/* Low Stock Alert */}
                         {lowStockAlerts.length > 0 && (
-                            <section className="dashboard-card alert-card" style={{ borderLeft: '4px solid #e74c3c' }}>
+                            <section className="dashboard-card alert-card">
                                 <div className="card-header">
-                                    <h3 style={{ color: '#e74c3c' }}>⚠️ Low Stock Alerts</h3>
+                                    <h3 className="alert-header-text">⚠️ Low Stock Alerts</h3>
                                 </div>
-                                <div className="low-stock-list" style={{ display: 'flex', gap: '1rem', overflowX: 'auto', paddingBottom: '0.5rem' }}>
+                                <div className="low-stock-list">
                                     {lowStockAlerts.map(item => (
-                                        <div key={item.id} className="stock-alert-chip" style={{ background: '#fdecea', padding: '0.5rem 1rem', borderRadius: '20px', border: '1px solid #fadbd8', minWidth: '150px' }}>
-                                            <div style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>{item.title}</div>
-                                            <div style={{ color: '#c0392b', fontSize: '0.85rem' }}>Only {item.stock} left</div>
+                                        <div key={item.id} className="stock-alert-chip">
+                                            <div className="alert-title">{item.title}</div>
+                                            <div className="alert-qty">Only {item.stock} left</div>
                                         </div>
                                     ))}
                                 </div>
@@ -645,9 +648,11 @@ const AdminDashboard = () => {
                                         {products.map(product => (
                                             <>
                                                 {/* Parent Header Row (Optional, maybe just group visually) */}
-                                                <tr key={`header-${product.handle}`} className="product-header-row" style={{ background: '#fafafa' }}>
-                                                    <td colSpan="4" style={{ fontWeight: 'bold', color: '#555', paddingTop: '1rem' }}>
-                                                        {product.title} <span style={{ fontWeight: 'normal', fontSize: '0.8em', color: '#999' }}>({product.handle})</span>
+                                                <tr key={`header-${product.handle}`} className="product-header-row">
+                                                    <td colSpan="4">
+                                                        {product.title}
+                                                        <span className="text-muted font-normal"> ({product.handle})</span>
+                                                        {product.category && <span className="category-badge-list">{product.category}</span>}
                                                     </td>
                                                 </tr>
                                                 {/* Variant Rows */}
@@ -699,13 +704,10 @@ const AdminDashboard = () => {
                                                 })}
                                                 {/* Add Variant Quick Action */}
                                                 <tr key={`add-${product.handle}`}>
-                                                    <td colSpan="4" style={{ borderBottom: '2px solid #eee' }}>
+                                                    <td colSpan="4" className="add-variant-cell">
                                                         <button
                                                             onClick={() => openAddVariant(product)}
-                                                            style={{
-                                                                background: 'none', border: 'none', color: '#C5A47E',
-                                                                cursor: 'pointer', fontSize: '0.85rem', marginLeft: '2rem', marginBottom: '0.5rem'
-                                                            }}
+                                                            className="add-variant-btn"
                                                         >
                                                             + Add Variant (e.g. 100ml)
                                                         </button>
@@ -766,12 +768,29 @@ const AdminDashboard = () => {
                                     disabled={!!newProduct.handle} // Lock name if adding variant
                                 />
                             </div>
+
+                            {!newProduct.handle && (
+                                <div className="form-group">
+                                    <label>Collection / Category</label>
+                                    <select
+                                        className="filter-select full-width"
+                                        value={newProduct.category}
+                                        onChange={e => setNewProduct({ ...newProduct, category: e.target.value })}
+                                    >
+                                        <option value="Signature">Signature Collection</option>
+                                        <option value="Men">Men's Collection</option>
+                                        <option value="Women">Women's Collection</option>
+                                        <option value="Limited">Limited Edition</option>
+                                    </select>
+                                </div>
+                            )}
+
                             <div className="form-row">
                                 <div className="form-group">
                                     <label>Size / Variant Name</label>
                                     <input
                                         required
-                                        placeholder="e.g. 50ml or 100ml"
+                                        placeholder="e.g. 50ml"
                                         value={newProduct.size}
                                         onChange={e => setNewProduct({ ...newProduct, size: e.target.value })}
                                     />
@@ -791,12 +810,14 @@ const AdminDashboard = () => {
                                     />
                                 </div>
                             </div>
+
                             {!newProduct.handle && (
                                 <>
                                     <div className="form-group"><label>Description</label><textarea rows="2" value={newProduct.description} onChange={e => setNewProduct({ ...newProduct, description: e.target.value })}></textarea></div>
                                     <div className="form-group"><label>Scent Notes</label><input value={newProduct.tags} onChange={e => setNewProduct({ ...newProduct, tags: e.target.value })} /></div>
                                 </>
                             )}
+
                             <button type="submit" className="primary-btn full-width" style={{ marginTop: '1rem' }}>
                                 {newProduct.handle ? 'Add Variant' : 'Create Product'}
                             </button>
@@ -806,38 +827,40 @@ const AdminDashboard = () => {
             )}
 
             {/* Manual Order (POS) Modal */}
-            {showManualOrderModal && (
-                <div className="modal-overlay" onClick={() => setShowManualOrderModal(false)}>
-                    <div className="modal-content" onClick={e => e.stopPropagation()}>
-                        <div className="modal-header"><h3>New Manual Order</h3><button className="close-modal" onClick={() => setShowManualOrderModal(false)}>&times;</button></div>
-                        <form onSubmit={handleCreateManualOrder} className="modal-body">
-                            <div className="form-group"><label>Customer Name</label><input required value={manualOrder.customerName} onChange={e => setManualOrder({ ...manualOrder, customerName: e.target.value })} /></div>
+            {
+                showManualOrderModal && (
+                    <div className="modal-overlay" onClick={() => setShowManualOrderModal(false)}>
+                        <div className="modal-content" onClick={e => e.stopPropagation()}>
+                            <div className="modal-header"><h3>New Manual Order</h3><button className="close-modal" onClick={() => setShowManualOrderModal(false)}>&times;</button></div>
+                            <form onSubmit={handleCreateManualOrder} className="modal-body">
+                                <div className="form-group"><label>Customer Name</label><input required value={manualOrder.customerName} onChange={e => setManualOrder({ ...manualOrder, customerName: e.target.value })} /></div>
 
-                            <div className="form-group" style={{ background: '#fafafa', padding: '1rem' }}>
-                                <label>Add Items</label>
-                                <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                    <select value={manualOrderItemId} onChange={e => setManualOrderItemId(e.target.value)} style={{ flex: 1 }}>
-                                        <option value="">Select Product...</option>
-                                        {flatVariants.map(v => <option key={v.id} value={v.id}>{v.title} (Stock: {v.stock})</option>)}
-                                    </select>
-                                    <button type="button" onClick={addManualItem} className="primary-btn">Add</button>
+                                <div className="form-group" style={{ background: '#fafafa', padding: '1rem' }}>
+                                    <label>Add Items</label>
+                                    <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                        <select value={manualOrderItemId} onChange={e => setManualOrderItemId(e.target.value)} style={{ flex: 1 }}>
+                                            <option value="">Select Product...</option>
+                                            {flatVariants.map(v => <option key={v.id} value={v.id}>{v.title} (Stock: {v.stock})</option>)}
+                                        </select>
+                                        <button type="button" onClick={addManualItem} className="primary-btn">Add</button>
+                                    </div>
+                                    <div className="manual-items-list" style={{ marginTop: '0.5rem' }}>
+                                        {manualOrder.items.map((item, idx) => (
+                                            <div key={idx} style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                                <small>{item.title} (x{item.quantity})</small>
+                                                <small>₱{item.price * item.quantity}</small>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    {manualOrder.items.length > 0 && <div style={{ textAlign: 'right', fontWeight: 'bold', marginTop: '0.5rem' }}>Total: ₱{manualOrder.items.reduce((s, i) => s + (i.price * i.quantity), 0).toLocaleString()}</div>}
                                 </div>
-                                <div className="manual-items-list" style={{ marginTop: '0.5rem' }}>
-                                    {manualOrder.items.map((item, idx) => (
-                                        <div key={idx} style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                            <small>{item.title} (x{item.quantity})</small>
-                                            <small>₱{item.price * item.quantity}</small>
-                                        </div>
-                                    ))}
-                                </div>
-                                {manualOrder.items.length > 0 && <div style={{ textAlign: 'right', fontWeight: 'bold', marginTop: '0.5rem' }}>Total: ₱{manualOrder.items.reduce((s, i) => s + (i.price * i.quantity), 0).toLocaleString()}</div>}
-                            </div>
-                            <button type="submit" className="primary-btn full-width" style={{ marginTop: '1rem' }}>Complete Order</button>
-                        </form>
+                                <button type="submit" className="primary-btn full-width" style={{ marginTop: '1rem' }}>Complete Order</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            )}
-        </div>
+                )
+            }
+        </div >
     );
 };
 

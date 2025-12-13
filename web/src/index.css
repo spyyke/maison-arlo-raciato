@@ -1,61 +1,78 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
 
-
 :root {
-  /* Brand Colors - Warm Luxury (Light Mode Core) */
-  --color-cream-base: #F5F2EC;
-  /* Warm Cream Background (Not White) */
-  --color-cream-surface: #EBE7DF;
-  /* Slightly Darker Cream for Cards/Surfaces */
-
-  /* Neutrals - Earth & Stone */
-  --color-charcoal: #3A3633;
-  /* Primary Text / Deep Earth */
-  --color-charcoal-muted: #6B665F;
-  /* Secondary Text / Stone */
-  --color-glass-border: rgba(58, 54, 51, 0.1);
-  /* Subtle dark border for light glass */
-
+  /* --- Brand Colors: Warm Luxury --- */
+  
+  /* Bases */
+  --color-cream-base: #F9F7F2;      /* Lighter, cleaner cream for main background */
+  --color-cream-surface: #F0EBE0;   /* Slightly deeper cream for cards/sections */
+  
+  /* Text & Depth */
+  --color-charcoal: #2C2825;        /* Deep, rich charcoal (almost black brown) */
+  --color-charcoal-muted: #6E6A66;  /* Elegant stone grey for secondary text */
+  
   /* Accents */
-  --color-ivory: #FFFFFF;
-  /* Pure White Highlights (sparingly used) */
-  --color-bronze: #9C8C74;
-  /* Muted Bronze / Aged Gold */
-
-  /* Text Mappings */
-  --text-main: var(--color-charcoal);
-  --text-muted: var(--color-charcoal-muted);
-  --text-light: #F5F2EC;
-  /* For dark buttons/overlays */
-
-  /* Typography */
-  --font-heading: 'Playfair Display', 'Garamond', serif;
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'Courier New', monospace;
-
-
-  /* Spacing */
-  --space-xs: 0.5rem;
-  --space-sm: 1.5rem;
-  --space-md: 3rem;
-  --space-lg: 6rem;
-  --space-xl: 10rem;
-
-  /* Effects */
-  --shadow-subtle: 0 10px 40px rgba(58, 54, 51, 0.05);
-  /* Soft warm shadow */
-  --shadow-float: 0 20px 60px rgba(58, 54, 51, 0.1);
+  --color-bronze: #9C8C74;          /* Metallic, muted bronze for highlights */
+  --color-bronze-light: #B8AA96;    /* Lighter bronze for hover states */
+  --color-ivory: #FFFFFF;           /* Pure white for strict contrast */
+  
+  /* Functional */
+  --color-glass-border: rgba(44, 40, 37, 0.08);
+  --glass-bg: rgba(249, 247, 242, 0.85); /* Matches cream base */
+  
+  /* --- Typography --- */
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+  
+  /* --- Spacing System --- */
+  --space-xs: 0.5rem;   /* 8px */
+  --space-sm: 1.5rem;   /* 24px */
+  --space-md: 3rem;     /* 48px */
+  --space-lg: 6rem;     /* 96px */
+  --space-xl: 10rem;    /* 160px */
+  
+  /* --- Effects --- */
+  --radius-sm: 2px;     /* Sharp, premium corners */
+  --radius-md: 4px;
+  
+  --shadow-subtle: 0 10px 40px rgba(44, 40, 37, 0.04);
+  --shadow-float: 0 20px 60px rgba(44, 40, 37, 0.08);
+  
   --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  --glass-bg: rgba(245, 242, 236, 0.85);
-  /* Warm Frosted Glass */
-  --glass-border: 1px solid var(--color-glass-border);
-
-  /* Helper vars */
   --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
-  --radius-sm: 4px;
 }
 
-/* Global Grain / Noise Overlay */
+/* Global Reset & Base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-cream-base);
+  color: var(--color-charcoal);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Typography Hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 400; /* Elegant, not bold */
+  color: var(--color-charcoal);
+  letter-spacing: -0.02em;
+}
+
+/* Utility: Noise Texture */
 .noise-overlay {
   position: fixed;
   top: 0;
@@ -64,140 +81,69 @@
   height: 100vh;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.02;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-/* Animations - Soft Gold Shimmer */
-@keyframes bronze-shimmer {
-  0% {
-    background-position: -200% center;
-  }
-
-  100% {
-    background-position: 200% center;
-  }
-}
-
-.text-shimmer {
-  background: linear-gradient(90deg,
-      #6B665F 0%,
-      #9C8C74 45%,
-      #3A3633 55%,
-      #6B665F 100%);
-  background-size: 200% auto;
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  animation: bronze-shimmer 4s ease-in-out infinite;
-}
-
-/* Bronze Button - Warm Luxury Version */
+/* Bronze Button */
 .btn-bronze {
-  padding: 1rem 3rem;
+  padding: 1rem 2.5rem;
   border: 1px solid var(--color-glass-border);
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.5);
   color: var(--color-charcoal);
   text-transform: uppercase;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.15em;
   font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
   transition: var(--transition-smooth);
   position: relative;
   overflow: hidden;
-  cursor: pointer;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  font-family: var(--font-body);
-  font-weight: 500;
-}
-
-.btn-bronze::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(to right,
-      transparent 0%,
-      rgba(255, 255, 255, 0.6) 50%,
-      transparent 100%);
-  transform: skewX(-25deg);
-  transition: all 0.7s ease;
-}
-
-.btn-bronze:hover::after {
-  left: 150%;
 }
 
 .btn-bronze:hover {
   background: var(--color-charcoal);
   color: var(--color-cream-base);
   border-color: var(--color-charcoal);
-  box-shadow: 0 0 30px rgba(156, 140, 116, 0.2);
-  /* Bronze shadow */
+  box-shadow: 0 10px 30px rgba(156, 140, 116, 0.15);
   transform: translateY(-2px);
 }
 
-/* Logotype Classes */
-.logotype-maison {
-  font-family: var(--font-body);
-  font-size: 0.7em;
+/* Primary Button (Solid) */
+.btn-primary {
+  padding: 1rem 2.5rem;
+  background: var(--color-charcoal);
+  color: var(--color-cream-base);
+  border: 1px solid var(--color-charcoal);
   text-transform: uppercase;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.15em;
+  font-size: 0.75rem;
   font-weight: 500;
-  margin-bottom: 0.2em;
-  display: block;
-  opacity: 0.9;
+  cursor: pointer;
+  transition: var(--transition-smooth);
 }
 
-.logotype-brand {
-  font-family: var(--font-heading);
-  font-weight: 400;
-  /* Playfair Display looks best at 400 for headings, maybe 500 for emphasis */
-  letter-spacing: -0.01em;
-  /* Tighter tracking for serif headlines */
-  text-transform: uppercase;
-}
-
-/* html { scroll-behavior: smooth; } Removed to prevent conflict with Lenis */
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: var(--font-body);
-  background-color: var(--color-cream-base);
-  color: var(--text-main);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-heading);
-  font-weight: 500;
-  letter-spacing: -0.02em;
+.btn-primary:hover {
+  background: transparent;
   color: var(--color-charcoal);
 }
 
-button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
-  background: none;
+/* Shimmer Animation */
+@keyframes bronze-shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
 }
 
-/* Loading State for Suspense */
+.text-shimmer {
+  background: linear-gradient(90deg, #2C2825 0%, #9C8C74 30%, #B8AA96 50%, #2C2825 80%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: bronze-shimmer 6s ease-in-out infinite;
+}
+
+/* Loading State */
 .loading-state {
   width: 100vw;
   height: 100vh;
@@ -205,29 +151,21 @@ button {
   justify-content: center;
   align-items: center;
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   z-index: 999;
   background-color: var(--color-cream-base);
 }
 
 .loading-state::after {
-  content: "LOADING";
-  font-family: var(--font-body);
-  font-size: 0.8rem;
-  letter-spacing: 0.3em;
-  color: var(--color-charcoal-muted);
-  animation: pulse-load 2s infinite;
+  content: "MAISON ARLO RACIÀTO";
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+  color: var(--color-bronze);
+  animation: pulse-load 2.5s infinite ease-in-out;
 }
 
 @keyframes pulse-load {
-
-  0%,
-  100% {
-    opacity: 0.3;
-  }
-
-  50% {
-    opacity: 1;
-  }
+  0%, 100% { opacity: 0.4; transform: scale(0.98); }
+  50% { opacity: 1; transform: scale(1); }
 }
