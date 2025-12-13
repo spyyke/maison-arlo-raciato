@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useMemo } from 'react';
 import { ProductService } from '../services/productService';
 import { ORDER_STATUSES, STATUS_COLORS, ORDER_STATUS_LABELS } from '../constants/orderStatus'; // Shared Constants
+import { useAdminOrders, useAdminProducts } from '../hooks/adminQueries';
+import { useQueryClient } from '@tanstack/react-query'; // Import queryClient for invalidation
 import {
     BarChart,
     Bar,
@@ -21,9 +23,14 @@ import './AdminDashboard.css';
 
 const AdminDashboard = () => {
     const navigate = useNavigate();
-    const [orders, setOrders] = useState([]);
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const queryClient = useQueryClient();
+
+    // React Query Hooks
+    const { data: products = [], isLoading: loadingProducts, refetch: refetchProducts } = useAdminProducts();
+    const { data: orders = [], isLoading: loadingOrders, refetch: refetchOrders } = useAdminOrders();
+
+    // Derived Loading State
+    const loading = loadingProducts || loadingOrders;
 
     // Analytics State
     const [analytics, setAnalytics] = useState({
@@ -80,35 +87,16 @@ const AdminDashboard = () => {
             navigate('/admin');
             return;
         }
-
-        fetchData();
     }, [navigate]);
 
-    const fetchData = async () => {
-        setLoading(true);
-        try {
-            // 1. Fetch Products (Now returns grouped products with variants)
-            const fetchedProducts = await ProductService.getAllProducts();
-            setProducts(fetchedProducts || []);
-
-            // 2. Fetch Orders
-            const { data: orderData, error } = await supabase
-                .from('orders')
-                .select('*')
-                .order('created_at', { ascending: false });
-
-            if (error) throw error;
-            const fetchedOrders = orderData || [];
-            setOrders(fetchedOrders);
-
-            processAnalytics(fetchedOrders);
-
-        } catch (error) {
-            console.error("Dashboard data fetch failed:", error);
-        } finally {
-            setLoading(false);
+    // Analytics Effect - Process whenever orders change
+    useEffect(() => {
+        if (orders.length > 0) {
+            processAnalytics(orders);
         }
-    };
+    }, [orders]);
+
+    // fetchData removed in favor of hooks
 
     const processAnalytics = (orderList) => {
         // --- Basic Metrics ---
@@ -219,21 +207,19 @@ const AdminDashboard = () => {
 
     // --- Order Logic ---
     const handleStatusChange = async (orderId, newStatus) => {
-        const previousOrders = [...orders];
-        setOrders(orders.map(o => o.id === orderId ? { ...o, order_status: newStatus } : o));
-
+        // Optimistic update could go here, but for now simple refetch
         try {
             const { error } = await supabase
                 .from('orders')
                 .update({ order_status: newStatus })
                 .eq('id', orderId);
             if (error) throw error;
-            // Re-process analytics for status chart
-            const updatedOrders = orders.map(o => o.id === orderId ? { ...o, order_status: newStatus } : o);
-            processAnalytics(updatedOrders);
+
+            // Invalidate queries to refresh data
+            queryClient.invalidateQueries(['adminOrders']);
         } catch (err) {
             console.error("Update status failed:", err);
-            setOrders(previousOrders);
+            alert("Failed to update status");
         }
     };
 
@@ -288,9 +274,8 @@ const AdminDashboard = () => {
             // Currently ProductService.updateProduct expects ID. Luckily our variants ARE rows with IDs.
             const updatedProduct = await ProductService.updateProduct(variant.id, updates);
             if (updatedProduct) {
-                // Refresh all data because updating one row might affect the grouped structure logic
-                // Or selectively update local state. For safety, re-fetch.
-                await fetchData();
+                // Invalidate
+                queryClient.invalidateQueries(['adminProducts']);
                 setEditingVariantId(null);
             }
         } catch (error) {
@@ -310,8 +295,8 @@ const AdminDashboard = () => {
 
             const created = await ProductService.createProduct(newProduct);
             if (created) {
-                // We should re-fetch to let the grouping logic run if we added a variant to existing handle
-                await fetchData();
+                // Invalidate
+                queryClient.invalidateQueries(['adminProducts']);
                 setShowAddProductModal(false);
                 setShowAddProductModal(false);
                 setNewProduct({ title: '', description: '', price: '', quantity: '', tags: '', imageUrl: '', size: '50ml', category: 'Signature', handle: '' });
@@ -388,7 +373,8 @@ const AdminDashboard = () => {
             });
             setShowManualOrderModal(false);
             setManualOrder({ customerName: '', customerEmail: '', items: [], notes: '', status: 'paid' }); // Reset
-            fetchData(); // Refresh all data to see new order and updated stocks
+            queryClient.invalidateQueries(['adminOrders']);
+            queryClient.invalidateQueries(['adminProducts']); // Inventory changed
             alert("Order created successfully!");
         } catch (error) {
             alert("Failed to create manual order.");

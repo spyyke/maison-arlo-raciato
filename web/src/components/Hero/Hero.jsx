@@ -53,7 +53,12 @@ const Hero = () => {
                 className="hero-background"
                 style={{ y: backgroundY }}
             >
-                <img src={heroBg} alt="Maison Arlo Raciàto Collection" />
+                <img
+                    src={heroBg}
+                    alt="Maison Arlo Raciàto Collection"
+                    fetchPriority="high"
+                    loading="eager"
+                />
                 <div className="hero-overlay"></div>
             </motion.div>
 

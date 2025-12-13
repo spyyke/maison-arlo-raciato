@@ -33,6 +33,7 @@ const ProductDetails = () => {
     if (error || !product) return <div className="product-details-page"><div className="error-state">Product not found</div></div>;
 
     const selectedVariant = product.variants.find(v => v.id === selectedVariantId) || product.variants[0];
+    const isSoldOut = selectedVariant && selectedVariant.inventory_quantity <= 0;
     const priceAmount = selectedVariant ? parseFloat(selectedVariant.price.amount) : 0;
     const currencyCode = selectedVariant ? selectedVariant.price.currencyCode : 'PHP';
     const imageSrc = product.images[0] ? product.images[0].url : '';
@@ -107,9 +108,15 @@ const ProductDetails = () => {
 
                     <div className="product-actions">
                         {selectedVariant?.inventory_quantity < 10 && selectedVariant?.inventory_quantity > 0 && (
-                            <div className="stock-alert-container">
+                            <div className="stock-alert-container ">
                                 <span className="stock-alert-icon">●</span>
                                 <span className="stock-alert-text">Low Stock: Only {selectedVariant.inventory_quantity} remaining</span>
+                            </div>
+                        )}
+                        {isSoldOut && (
+                            <div className="stock-alert-container sold-out">
+                                <span className="stock-alert-icon">●</span>
+                                <span className="stock-alert-text">Sold Out</span>
                             </div>
                         )}
 
@@ -128,10 +135,10 @@ const ProductDetails = () => {
                             <button
                                 className="add-to-cart-btn btn-primary"
                                 onClick={handleAddToCart}
-                                disabled={isAdding}
-                                style={{ flex: 1, minWidth: '150px' }}
+                                disabled={isAdding || isSoldOut}
+                                style={{ flex: 1, minWidth: '150px', opacity: isSoldOut ? 0.6 : 1, cursor: isSoldOut ? 'not-allowed' : 'pointer' }}
                             >
-                                {isAdding ? 'Adding...' : 'Add to Cart'}
+                                {isSoldOut ? 'Sold Out' : (isAdding ? 'Adding...' : 'Add to Cart')}
                             </button>
                             <button
                                 className="sample-btn btn-bronze"

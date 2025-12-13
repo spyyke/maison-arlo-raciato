@@ -29,7 +29,8 @@ const mapSupabaseToProduct = (row) => {
     images: [
       { url: row.image_url || 'https://placehold.co/600x400?text=No+Image' }
     ],
-    tags: row.scent_profile ? row.scent_profile.split(',').map(s => `Note: ${s.trim()}`) : []
+    tags: row.scent_profile ? row.scent_profile.split(',').map(s => `Note: ${s.trim()}`) : [],
+    category: row.category // Map category from DB
   };
 };
 
@@ -72,6 +73,7 @@ export const ProductService = {
               availableForSale: row.quantity_available > 0,
               images: [{ url: row.image_url || 'https://placehold.co/600x400?text=No+Image' }],
               tags: row.scent_profile ? row.scent_profile.split(',').map(s => `Note: ${s.trim()}`) : [],
+              category: row.category,
               variants: []
             });
           }
@@ -135,6 +137,7 @@ export const ProductService = {
             availableForSale: matchingRows.some(row => row.quantity_available > 0),
             images: [{ url: firstRow.image_url || 'https://placehold.co/600x400?text=No+Image' }],
             tags: firstRow.scent_profile ? firstRow.scent_profile.split(',').map(s => `Note: ${s.trim()}`) : [],
+            category: firstRow.category,
             variants: matchingRows.map(row => ({
               id: row.id,
               title: row.size || 'Default Size',
@@ -225,6 +228,7 @@ export const ProductService = {
         image_url: productData.imageUrl || null,
         scent_profile: productData.tags,
         size: productData.size || '50ml', // New column support
+        category: productData.category,
         status: 'active'
       };
 
@@ -245,7 +249,9 @@ export const ProductService = {
         description: newRow.description,
         availableForSale: newRow.quantity_available > 0,
         images: [{ url: newRow.image_url || '' }],
+        images: [{ url: newRow.image_url || '' }],
         tags: [],
+        category: newRow.category,
         variants: [{
           id: newRow.id,
           title: newRow.size || '50ml',
